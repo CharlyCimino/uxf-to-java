@@ -8,7 +8,7 @@ class Atributo {
         this.valor = valor;
     }
 
-    static parse(attrItem) {
+    static parse(cad) {
         // Inicializar los valores predeterminados
         let visibilidad = '';
         let nombre = '';
@@ -18,14 +18,18 @@ class Atributo {
         let valor = '';
 
         // Determinar si es static
-        ({ esStatic, valor: attrItem } = resolverStatic(attrItem));
+        ({ esStatic, valor: cad } = resolverStatic(cad));
 
         // Determinar si es final
-        if (attrItem.includes('final') || attrItem.includes('=')) {
+        if (cad.includes('final') || cad.includes('=')) {
             esFinal = true;
         }
         let regex = /^([+\-#~])?\s*(\w+)\s*:\s*(\w+)(?:\s*=\s*(.+))?$/;
-        [,visibilidad, nombre, tipo, valor] = attrItem.match(regex);
+        let matchAtributo = regex.exec(cad);
+
+        if(!matchAtributo) throw new Error(`Error al parsear atributo: ${cad}`);
+
+        [,visibilidad, nombre, tipo, valor] = matchAtributo;
 
         return new Atributo(resolverVisibilidad(visibilidad), nombre, tipo, esFinal, esStatic, valor);
     }

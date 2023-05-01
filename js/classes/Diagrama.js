@@ -11,14 +11,13 @@ class Diagrama {
         const relacionesSinProcesar = datos.filter(elem => elem.id === "Relation");
 
         const clases = Diagrama.procesarClases(clasesSinProcesar);
-
+        console.log(clases);
         return new Diagrama("Nombre no decidido", clases);
     }
 
     static procesarClases(clasesSinProcesar) {
         const clases = [];
         clasesSinProcesar.forEach(clazzItem => {
-            console.log(clazzItem)
             clazzItem = clazzItem.data.replaceAll(' ', '').split('\n').filter(x => x !== '');
             clases.push(Clase.parse(clazzItem));
           });
