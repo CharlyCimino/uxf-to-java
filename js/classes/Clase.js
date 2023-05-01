@@ -1,15 +1,15 @@
 class Clase {
-    constructor(tipo = '', nombre = '', atributos = [], metodos = []) {
+    constructor(tipo = '', nombre = '', atributos = [], metodos = [], coord) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.atributos = atributos;
         this.metodos = metodos;
-
+        this.coord = coord;
         this.atributos = this.atributos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
         this.metodos = this.metodos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
     }
 
-    static parse(clazzItem) {
+    static parse(clazzItem, coord) {
         let tipo = '', nombre = '', atributos = [], metodos = [];
 
         ({ tipo, nombre } = Clase.resolverTipoYNombreDeElemento(clazzItem));
@@ -42,7 +42,7 @@ class Clase {
 
         metodos = metodosSinProcesar.map(Metodo.parse);
 
-        return new Clase(tipo, nombre, atributos, metodos);
+        return new Clase(tipo, nombre, atributos, metodos, new Coordenada(coord));
     }
 
     static resolverTipoYNombreDeElemento(clazzItem) {

@@ -6,7 +6,13 @@ class Diagrama {
     }
 
     static parse(elements) {
-        const datos = (elements.map(elem => { return { id: elem.id[0]._text, data: elem.panel_attributes[0]._text } }));
+        const datos = (elements.map(elem => { return { 
+            id: elem.id[0]._text, 
+            data: elem.panel_attributes[0]._text, 
+            coord: Object.fromEntries(
+                Object.entries(elem.coordinates[0]).map(([key, value]) => [key, parseInt(value[0]._text)])
+              )
+        } }));
         const clasesSinProcesar = datos.filter(elem => elem.id === "UMLClass");
         const relacionesSinProcesar = datos.filter(elem => elem.id === "Relation");
 
@@ -18,8 +24,8 @@ class Diagrama {
     static procesarClases(clasesSinProcesar) {
         const clases = [];
         clasesSinProcesar.forEach(clazzItem => {
-            clazzItem = clazzItem.data.replaceAll(' ', '').split('\n').filter(x => x !== '');
-            clases.push(Clase.parse(clazzItem));
+            const data = clazzItem.data.replaceAll(' ', '').split('\n').filter(x => x !== '');
+            clases.push(Clase.parse(data, clazzItem.coord));
           });
         return clases;
     }

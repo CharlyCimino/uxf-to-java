@@ -22,7 +22,7 @@ function loadFile() {
     result = xmlToJSON.parseString(xmlString);   // parse
 
     const elements = result.diagram[0].element;
-    //console.log(elements);
+    console.log(elements);
     diagram = Diagrama.parse(elements);
     //console.log(diagram);
   
