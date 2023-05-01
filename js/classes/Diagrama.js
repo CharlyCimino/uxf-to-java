@@ -17,8 +17,9 @@ class Diagrama {
         const relacionesSinProcesar = datos.filter(elem => elem.id === "Relation");
 
         const clases = Diagrama.procesarClases(clasesSinProcesar);
-        console.log(clases);
-        return new Diagrama("Nombre no decidido", clases);
+        const relaciones = Diagrama.procesarRelaciones(relacionesSinProcesar);
+        console.log(relaciones);
+        return new Diagrama("Nombre no decidido", clases, relaciones);
     }
 
     static procesarClases(clasesSinProcesar) {
@@ -28,6 +29,15 @@ class Diagrama {
             clases.push(Clase.parse(data, clazzItem.coord));
           });
         return clases;
+    }
+
+    static procesarRelaciones(relacionesSinProcesar) {
+        const relaciones = [];
+        relacionesSinProcesar.forEach(relItem => {
+            const data = relItem.data.replaceAll(' ', '').split('\n').filter(x => x !== '');
+            relaciones.push(Relacion.parse(data, relItem.coord));
+          });
+        return relaciones.filter(r => r !== "dependencia");
     }
 
     toJava() {
