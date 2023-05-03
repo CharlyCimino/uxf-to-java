@@ -1,11 +1,9 @@
-class Metodo {
+class Metodo extends MetodoConstructor {
     constructor(visibilidad = '', nombre = '', esFinal = false, esStatic = false, esAbstract = false, parametros = [], retorno = '') {
-        this.visibilidad = visibilidad;
-        this.nombre = nombre;
+        super(visibilidad, nombre, parametros);
         this.esFinal = esFinal;
         this.esStatic = esStatic;
         this.esAbstract = esAbstract;
-        this.parametros = parametros;
         this.retorno = retorno;
     }
 
@@ -35,6 +33,10 @@ class Metodo {
             esFinal = true;
         }
 
+        // Posibles métodos:
+        /* 
+            
+        */
         let regexMetodo = /^([+\-#])?\s*(\w+)\((.*)\)\s*:\s*(\w+)/;
         let matchMetodo = regexMetodo.exec(cad);
 

@@ -4,25 +4,43 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/monokai-sublime.min.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
 <body>
     <input type="file" name="" id="inputUxf" accept=".uxf" value="pruebaEnums.uxf">
     <br>
     <button onclick="loadFile()">Cargar archivo</button>
+
+    <div class="err">
+
+    </div>
+
+    <div>
+        <pre><code id="result" class="language-java"></code></pre>
+    </div>
     
+    <script src="js/lib/highlight-js/java.min.js"></script>
+    <script src="js/lib/highlight-js/xml.min.js"></script>
+    <script src="js/lib/highlight-js/highlight.min.js"></script>
     <script src="js/lib/xmlToJSON.min.js"></script>
-    <script src="js/classes/UMLToJavaUtils.js"></script>
+    <script src="test/umlTest.js"></script>
+    <script src="js/utils/msjs-error.js"></script>
+    <script src="js/utils/uxfToJava-utils.js"></script>
     <script src="js/classes/Coordenada.js"></script>
     <script src="js/classes/Relacion.js"></script>
     <script src="js/classes/RelacionAsociacion.js"></script>
     <script src="js/classes/RelacionHerencia.js"></script>
     <script src="js/classes/Atributo.js"></script>
     <script src="js/classes/AtributoEnum.js"></script>
-    <script src="js/classes/Metodo.js"></script>
     <script src="js/classes/MetodoConstructor.js"></script>
+    <script src="js/classes/Metodo.js"></script>
     <script src="js/classes/Clase.js"></script>
     <script src="js/classes/Diagrama.js"></script>
     <script src="js/index.js"></script>
+
+    <script></script>
+
 </body>
 </html>

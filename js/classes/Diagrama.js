@@ -26,6 +26,7 @@ class Diagrama {
         const clases = [];
         clasesSinProcesar.forEach(clazzItem => {
             const data = clazzItem.data.replaceAll(' ', '').split('\n').filter(x => x !== '');
+            console.log(data);
             clases.push(Clase.parse(data, clazzItem.coord));
           });
         return clases;

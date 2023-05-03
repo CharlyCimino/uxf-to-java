@@ -29,3 +29,4 @@ function resolverVisibilidad(cad) {
     }
     return vis;
 }
+

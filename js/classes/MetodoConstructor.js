@@ -15,10 +15,8 @@ class MetodoConstructor {
         let nombre = '';
         let parametros = [];
 
-        let regexMetodo = /^([+\-#])?\s*(\w+)\((.*?)\)\s*(?::\s*(\w+))?/;
-        let match = regexMetodo.exec(cad);
-
-        if (!match) throw new Error(`Error al parsear método constructor: ${cad}`);
+        let match = MetodoConstructor.getRegex().exec(cad);
+        if (!match) throw new Error(`No se pudo parsear método constructor: '${cad}'\n${REVISAR_SINTAXIS}`);
 
         visibilidad = resolverVisibilidad(match[1]);
         nombre = match[2];
@@ -38,6 +36,20 @@ class MetodoConstructor {
 
         // Crear y retornar el objeto resultante
         return new MetodoConstructor(visibilidad, nombre, parametros);
+    }
+
+    static getRegex() {
+        /*
+            NombreClase()
+            +NombreClase()
+            #NombreClase()
+            -NombreClase()
+            +NombreClase(Tipo x)
+            +NombreClase(Tipo x1, Tipo x2)
+            +NombreClase(Tipo)
+            +NombreClase(Tipo, Tipo)
+        */
+        return /^([+\-#])?\s*(\w+)\((.*?)\)\s*(?::\s*(\w+))?/;
     }
 
     toJava() {

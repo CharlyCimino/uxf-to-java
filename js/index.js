@@ -7,33 +7,45 @@
 //const json = xml2json("<prueba>Hola</prueba>");
 
 function loadFile() {
-  console.log("ok")
-  const input = document.getElementById("inputUxf");
+  /*const input = document.getElementById("inputUxf");
   const file = input.files[0];
 
+  const xmlDoc = parser.parseFromString(xmlString, "text/xml");
   
   const reader = new FileReader();
   reader.onload = () => {
     const xmlString = reader.result;
     const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlString, "text/xml");
     
-    // Aquí puedes hacer lo que quieras con el documento XML
-    result = xmlToJSON.parseString(xmlString);   // parse
 
+  }
+  reader.readAsText(file);*/
+
+
+    
+  // Aquí puedes hacer lo que quieras con el documento XML
+  try {
+    result = xmlToJSON.parseString(UML_TEST);   // parse
     const elements = result.diagram[0].element;
     console.log(elements);
     diagram = Diagrama.parse(elements);
     //console.log(diagram);
-  
-    const javaResult = diagram.toJava();
-    console.log(javaResult)
 
+    const javaResult = diagram.toJava();
+    if(javaResult) {
+      console.log(javaResult);
+      document.querySelector("#result").innerHTML= javaResult;
+      hljs.highlightAll();
+    }
+    console.log(javaResult)
+  } catch(e) {
+    document.querySelector(".err").innerHTML = (`<h3 style="color: crimson">${e}</h3>`);
+    console.error(e)
   }
-  reader.readAsText(file);
+  
 }
 
-//loadFile();
+loadFile();
 
 
 /*const elements = result.diagram.element;
