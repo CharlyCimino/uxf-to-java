@@ -5,6 +5,10 @@ class MetodoConstructor {
         this.parametros = parametros;
     }
 
+    static order() {
+        return 3;
+    }
+
     static parse(cad) {
         // Inicializar los valores predeterminados
         let visibilidad = '';

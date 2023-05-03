@@ -9,6 +9,10 @@ class Metodo {
         this.retorno = retorno;
     }
 
+    static order() {
+        return 4;
+    }
+
     static parse(cad) {
         let resultado;
         // Inicializar los valores predeterminados

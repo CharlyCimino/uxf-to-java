@@ -4,6 +4,10 @@ class AtributoEnum {
         this.valores = valores;
     }
 
+    static order() {
+        return 1;
+    }
+
     static parse(cad) {
         let retorno;
         // Inicializar los valores predeterminados

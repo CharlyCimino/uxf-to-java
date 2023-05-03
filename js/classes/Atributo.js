@@ -8,6 +8,10 @@ class Atributo {
         this.valor = valor;
     }
 
+    static order() {
+      return 2;
+    }
+
     static parse(cad) {
         // Inicializar los valores predeterminados
         let visibilidad = '';
