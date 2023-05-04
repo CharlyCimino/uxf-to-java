@@ -18,15 +18,18 @@ function resolverVisibilidad(cad) {
     let vis = '';
     switch (cad) {
         case '+':
-            vis = 'public'
+            vis = 'public '
             break;
         case '-':
-            vis = 'private'
+            vis = 'private '
             break;
         case '#':
-            vis = 'protected'
+            vis = 'protected '
             break;
     }
     return vis;
 }
 
+function resolverRetorno(cad) {
+    return cad ? cad.replace(':', '') : 'void';
+}

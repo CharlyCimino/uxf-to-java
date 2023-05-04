@@ -18,15 +18,14 @@ class Diagrama {
 
         const clases = Diagrama.procesarClases(clasesSinProcesar);
         const relaciones = Diagrama.procesarRelaciones(relacionesSinProcesar);
-        console.log(relaciones);
+        //console.log(relaciones);
         return new Diagrama("Nombre no decidido", clases, relaciones);
     }
 
     static procesarClases(clasesSinProcesar) {
         const clases = [];
         clasesSinProcesar.forEach(clazzItem => {
-            const data = clazzItem.data.replaceAll(' ', '').split('\n').filter(x => x !== '');
-            console.log(data);
+            const data = clazzItem.data.replaceAll('  ', '').split('\n').filter(x => x !== '');
             clases.push(Clase.parse(data, clazzItem.coord));
           });
         return clases;

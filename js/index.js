@@ -28,16 +28,15 @@ function loadFile() {
     result = xmlToJSON.parseString(UML_TEST);   // parse
     const elements = result.diagram[0].element;
     console.log(elements);
+    
     diagram = Diagrama.parse(elements);
-    //console.log(diagram);
-
+    console.log(diagram);
+    
     const javaResult = diagram.toJava();
     if(javaResult) {
-      console.log(javaResult);
       document.querySelector("#result").innerHTML= javaResult;
       hljs.highlightAll();
     }
-    console.log(javaResult)
   } catch(e) {
     document.querySelector(".err").innerHTML = (`<h3 style="color: crimson">${e}</h3>`);
     console.error(e)

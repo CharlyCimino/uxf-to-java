@@ -34,13 +34,12 @@ class Clase {
         }
 
         if (tipo === "enum") {
-            atributos = atributosSinProcesar.map(AtributoEnum.parse);
-            console.log(atributos);
+            //atributos = atributosSinProcesar.map(AtributoEnum.parse);
+            //console.log(atributos);
         } else {
-            atributos = atributosSinProcesar.map(Atributo.parse);
+            //atributos = atributosSinProcesar.map(Atributo.parse);
         }
-
-        metodos = metodosSinProcesar.map(Metodo.parse);
+        metodos = metodosSinProcesar.map(m => Metodo.parse(m, nombre));
 
         return new Clase(tipo, nombre, atributos, metodos, new Coordenada(coord));
     }
