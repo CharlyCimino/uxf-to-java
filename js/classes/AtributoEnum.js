@@ -1,7 +1,7 @@
 class AtributoEnum {
-    constructor(nombre = '', valores = '') {
+    constructor(nombre = '', valoresEntreParentesis = '') {
         this.nombre = nombre;
-        this.valores = valores;
+        this.valoresEntreParentesis = valoresEntreParentesis;
     }
 
     static order() {
@@ -10,21 +10,16 @@ class AtributoEnum {
 
     static parse(cad) {
         let retorno;
-        // Inicializar los valores predeterminados
-        let cadTrasStatic;
         let nombre = '';
-        let valores = '';
+        let valoresEntreParentesis = '';
 
-        // Determinar si es static
-        ({ valor: cadTrasStatic } = resolverStatic(cad));
-
-        const regex = /\+?(\w+)(?:\((.*?)\))?/;
-        const match = cadTrasStatic.match(regex);
+        let match = AtributoEnum.getRegex().exec(cad);
+        if (!match) throw new Error(`No se pudo parsear valor '${cad}' de la clase enum ${nombreClase}\n${REVISAR_SINTAXIS}`);
         
-        if (match && !cadTrasStatic.includes(":")) {
-            nombre = match[1];
-            valores = match[2] || "";
-            retorno = new AtributoEnum(nombre, valores);
+        nombre = match[1];
+        if (match[2]) {
+            valoresEntreParentesis = match[2];
+            retorno = new AtributoEnum(nombre, valoresEntreParentesis);
         } else {
             retorno = Atributo.parse(cad);
         }
@@ -32,10 +27,22 @@ class AtributoEnum {
         return retorno;
     }
 
+    static getRegex() {
+        return createRegex([
+            /^(?:_)?\s*/,                                    // static (opcional)
+            /(?:\+)?\s*/,                                    // public (opcional)
+            /([a-zA-Z0-9]+)\s*/,                             // Identificador
+            /(\(\s*[a-zA-Z0-9"'.]+\s*(?:,[a-zA-Z0-9"'.]+)*\s*\))?\s*/,  // Parámetros (opcionales)
+            /(?::\s*[a-zA-Z0-9_]+)?/,                        // Tipo de dato (opcional)
+            /_?/,                                            // Cierre de static (opcional)
+            /$/,                                             // Fin de línea
+        ]);
+    }   
+
     toJava() {
         let javaCode = this.nombre;
-        if (this.valores) {
-            javaCode += `(${this.valores})`;
+        if (this.valoresEntreParentesis) {
+            javaCode += `${this.valoresEntreParentesis}`;
         }
         return javaCode;
     }

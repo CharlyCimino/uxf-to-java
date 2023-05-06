@@ -59,14 +59,13 @@ class Metodo {
 
     static getRegex() {
         return createRegex([
-            /(?:^(?:_|\/)?\s*)/,                                // Abstract o static (opcional)
-            /([-+#]?)/,                                         // Visibilidad (opcional)
-            /\s*/,                                              // Posibles espacios
-            /([a-zA-Z0-9_]+)/,                                  // Identificador
+            /^(?:_|\/)?\s*/,                                    // Abstract o static (opcional)
+            /([-+#]?)\s*/,                                      // Visibilidad (opcional)
+            /([a-zA-Z0-9]+)/,                                  // Identificador
             /\s*\(\s*/,                                         // Paréntesis de apertura
-            /((?:(?:(?:[a-zA-Z0-9_]+\s*(?:,\s*[a-zA-Z0-9_]+)*))|(?:[a-zA-Z0-9_]+\s*(?::\s*[a-zA-Z0-9_]+)?\s*(?:,\s*[a-zA-Z0-9_]+\s*(?::\s*[a-zA-Z0-9_]+)?)*))?)/,
+            /((?:(?:(?:[a-zA-Z0-9]+\s*(?:,\s*[a-zA-Z0-9]+)*))|(?:[a-zA-Z0-9]+\s*(?::\s*[a-zA-Z0-9]+)?\s*(?:,\s*[a-zA-Z0-9]+\s*(?::\s*[a-zA-Z0-9]+)?)*))?)/,
             /\s*\)\s*/,                                         // Paréntesis de cierre
-            /(:\s*[a-zA-Z0-9_]+)?/,                             // :Retorno (opcional)
+            /(:\s*[a-zA-Z0-9]+)?/,                             // :Retorno (opcional)
             /(?:\s*(?:_|\/)?)/,                                 // Abstract o static (opcional)
             /$/,                                                // Fin de línea
         ]);

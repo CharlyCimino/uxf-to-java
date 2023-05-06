@@ -27,7 +27,7 @@ function loadFile() {
   try {
     result = xmlToJSON.parseString(UML_TEST);   // parse
     const elements = result.diagram[0].element;
-    console.log(elements);
+    //console.log(elements);
     
     diagram = Diagrama.parse(elements);
     console.log(diagram);
