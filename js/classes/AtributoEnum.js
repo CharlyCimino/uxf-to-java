@@ -1,29 +1,25 @@
 class AtributoEnum {
     constructor(nombre = '', valoresEntreParentesis = '') {
-        this.nombre = nombre;
-        this.valoresEntreParentesis = valoresEntreParentesis;
+        this.nombre = nombre.trim();
+        this.valoresEntreParentesis = valoresEntreParentesis.trim();
     }
 
     static order() {
         return 1;
     }
 
-    static parse(cad) {
+    static parse(cad, nombreClase) {
         let retorno;
         let nombre = '';
         let valoresEntreParentesis = '';
 
         let match = AtributoEnum.getRegex().exec(cad);
-        if (!match) throw new Error(`No se pudo parsear valor '${cad}' de la clase enum ${nombreClase}\n${REVISAR_SINTAXIS}`);
-        
-        nombre = match[1];
-        if (match[2]) {
-            valoresEntreParentesis = match[2];
-            retorno = new AtributoEnum(nombre, valoresEntreParentesis);
+        if (!match) {
+            retorno = Atributo.parse(cad, nombreClase);
         } else {
-            retorno = Atributo.parse(cad);
+            [,nombre, valoresEntreParentesis] = match;
+            retorno = new AtributoEnum(nombre, valoresEntreParentesis);
         }
-
         return retorno;
     }
 
@@ -31,9 +27,9 @@ class AtributoEnum {
         return createRegex([
             /^(?:_)?\s*/,                                    // static (opcional)
             /(?:\+)?\s*/,                                    // public (opcional)
-            /([a-zA-Z0-9]+)\s*/,                             // Identificador
+            /([A-Z](?:[A-Z0-9_]*[A-Z0-9])?)\s*/,             // Identificador en mayúsculas
             /(\(\s*[a-zA-Z0-9"'.]+\s*(?:,[a-zA-Z0-9"'.]+)*\s*\))?\s*/,  // Parámetros (opcionales)
-            /(?::\s*[a-zA-Z0-9_]+)?/,                        // Tipo de dato (opcional)
+            /(?::\s*[a-zA-Z0-9]+)?/,                        // Tipo de dato (opcional)
             /_?/,                                            // Cierre de static (opcional)
             /$/,                                             // Fin de línea
         ]);

@@ -14,14 +14,10 @@ class Metodo {
     }
 
     static parse(cad, nombreClase) {
-        let resultado;
-        let visibilidad = '';
-        let nombre = '';
         let esStatic = false;
         let esAbstract = false;
         let esConstructor = false;
         let parametros = [];
-        let retorno = '';
 
         // Determinar si es static
         ({ esStatic, valor: cad } = resolverStatic(cad));
@@ -32,10 +28,12 @@ class Metodo {
         let match = Metodo.getRegex().exec(cad);
         if (!match) throw new Error(`No se pudo parsear método '${cad}' de la clase ${nombreClase}\n${REVISAR_SINTAXIS}`);
 
+        let [, visibilidad, nombre, , retorno] = match;
+
         
         visibilidad = resolverVisibilidad(match[1]?.trim());
         nombre = match[2]?.trim();
-        retorno = resolverRetorno(match[4]?.trim());
+        retorno = match[4] ? match[4].trim() : 'void';
         esConstructor = nombreClase === nombre;
 
         parametros = [];
@@ -50,11 +48,7 @@ class Metodo {
                 }
             });
         }
-
-        resultado = new Metodo(visibilidad, nombre, esStatic, esAbstract, esConstructor, parametros, retorno);
-        
-
-        return resultado;
+        return new Metodo(visibilidad, nombre, esStatic, esAbstract, esConstructor, parametros, retorno);;
     }
 
     static getRegex() {
@@ -65,7 +59,7 @@ class Metodo {
             /\s*\(\s*/,                                         // Paréntesis de apertura
             /((?:(?:(?:[a-zA-Z0-9]+\s*(?:,\s*[a-zA-Z0-9]+)*))|(?:[a-zA-Z0-9]+\s*(?::\s*[a-zA-Z0-9]+)?\s*(?:,\s*[a-zA-Z0-9]+\s*(?::\s*[a-zA-Z0-9]+)?)*))?)/,
             /\s*\)\s*/,                                         // Paréntesis de cierre
-            /(:\s*[a-zA-Z0-9]+)?/,                             // :Retorno (opcional)
+            /(?::\s*([a-zA-Z0-9]+))?/,                           // :Retorno (opcional)
             /(?:\s*(?:_|\/)?)/,                                 // Abstract o static (opcional)
             /$/,                                                // Fin de línea
         ]);

@@ -1,45 +1,54 @@
 class Atributo {
     constructor(visibilidad = '', nombre = '', tipo = '', esFinal = false, esStatic = false, valor = '') {
         this.visibilidad = visibilidad;
-        this.nombre = nombre;
-        this.tipo = tipo;
+        this.nombre = nombre.trim();
+        this.tipo = tipo.trim();
         this.esFinal = esFinal;
         this.esStatic = esStatic;
-        this.valor = valor;
+        this.valor = valor.trim();
     }
 
     static order() {
       return 2;
     }
 
-    static parse(cad) {
-        // Inicializar los valores predeterminados
-        let visibilidad = '';
-        let nombre = '';
-        let tipo = '';
+    static parse(cad, nombreClase) {
         let esFinal = false;
-        let esStatic = false;
-        let valor = '';
 
-        // Determinar si es static
-        ({ esStatic, valor: cad } = resolverStatic(cad));
+        let match = Atributo.getRegex().exec(cad);
+        if (!match) throw new Error(`No se pudo parsear atributo '${cad}' de la clase ${nombreClase}\n${REVISAR_SINTAXIS}`);
 
-        // Determinar si es final
-        if (cad.includes('final') || cad.includes('=')) {
-            esFinal = true;
+        let [,esStatic, visibilidad, nombre, tipo, valor] = match;
+
+        if (valor) {
+          esFinal = true;
         }
-        let regex = /^([+\-#~])?\s*(\w+)\s*:\s*(\w+)(?:\s*=\s*(.+))?$/;
-        let matchAtributo = regex.exec(cad);
 
-        if(!matchAtributo) throw new Error(`Error al parsear atributo: ${cad}`);
+        if (!tipo) {
+          tipo = 'Object';
+        }
 
-        [,visibilidad, nombre, tipo, valor] = matchAtributo;
+        if (esStatic) {
+          esStatic = true;
+        }
 
         return new Atributo(resolverVisibilidad(visibilidad), nombre, tipo, esFinal, esStatic, valor);
     }
 
+    static getRegex() {
+      return createRegex([
+          /^(_)?\s*/,                                    // static (opcional)
+          /([-+#]?)\s*/,                                  // Visibilidad (opcional)
+          /([a-zA-Z](?:[a-zA-Z0-9_]*[a-zA-Z0-9])?)\s*/,   // Identificador
+          /(?::(\s*[a-zA-Z0-9]+))?\s*/,                   // Tipo (opcional)
+          /(?:=(\s*[a-zA-Z0-9"'.]+))?\s*/,                // Valor (opcional)
+          /_?/,                                            // Cierre de static (opcional)
+          /$/,                                             // Fin de línea
+      ]);
+  }   
+
     toJava() {
-        let javaCode = this.visibilidad + ' ';
+        let javaCode = this.visibilidad;
         if (this.esStatic) {
           javaCode += 'static ';
         }

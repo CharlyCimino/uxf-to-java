@@ -29,7 +29,3 @@ function resolverVisibilidad(cad) {
     }
     return vis;
 }
-
-function resolverRetorno(cad) {
-    return cad ? cad.replace(':', '') : 'void';
-}
