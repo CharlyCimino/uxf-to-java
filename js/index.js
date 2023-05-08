@@ -1,56 +1,52 @@
 
-//let diagram = new Diagrama();
 
-// Lee el archivo ".uxf" y convierte su contenido a un objeto JavaScript
-//const fileContents = fs.readFileSync('pruebaEnums.uxf', 'utf8');
+function procesarXml(xmlObject) {
 
-//const json = xml2json("<prueba>Hola</prueba>");
+}
 
-function loadFile() {
-  /*const input = document.getElementById("inputUxf");
-  const file = input.files[0];
-
-  const xmlDoc = parser.parseFromString(xmlString, "text/xml");
-  
+function loadFiles() {
+  const input = document.getElementById("inputUxf");
   const reader = new FileReader();
-  reader.onload = () => {
-    const xmlString = reader.result;
-    const parser = new DOMParser();
-    
+  reader.onload = procesarArchivo;
 
+  for (const file of input.files) {
+    reader.readAsText(file);
   }
-  reader.readAsText(file);*/
+}
 
+const upload = async (event) => {
+  let files = Array.from(document.getElementById("inputUxf").files).map(file => {
+    let reader = new FileReader();
+    return new Promise(async resolve => {
+      reader.onload = () => resolve(reader.result);
+      reader.readAsText(file);
+    });
+  });
 
-    
-  // Aquí puedes hacer lo que quieras con el documento XML
+  let res = await Promise.all(files);
+  procesarArchivos(res);
+}
+
+function procesarArchivos(archivos) {
   try {
-    result = xmlToJSON.parseString(UML_TEST);   // parse
-    const elements = result.diagram[0].element;
-    //console.log(elements);
-    
-    diagram = Diagrama.parse(elements);
-    console.log(diagram);
-    
-    const javaResult = diagram.toJava();
-    if(javaResult) {
-      document.querySelector("#result").innerHTML= javaResult;
-      hljs.highlightAll();
-    }
-  } catch(e) {
+    const res = archivos.map(fileString => xmlToJSON.parseString(fileString));
+    const diagramas = res.map(xmlLetino => xmlToClassDiagram(xmlLetino));
+    diagramas.forEach(diagrama => {
+      const javaResult = diagrama.toJava();
+      if (javaResult) {
+        document.querySelector("#result").innerHTML = javaResult;
+        hljs.highlightAll();
+      }
+    });
+  }
+  catch (e) {
     document.querySelector(".err").innerHTML = (`<h3 style="color: crimson">${e}</h3>`);
     console.error(e)
   }
-  
+
 }
 
-loadFile();
-
-
-/*const elements = result.diagram.element;
-
-  diagram = Diagrama.parse(elements);
-  //console.log(diagram);
-  
-  const javaResult = diagram.toJava();
-  fs.writeFileSync(`${diagram.nombre}.java`, javaResult);*/
+function xmlToClassDiagram(xmlObject) {
+  const elements = xmlObject.diagram[0].element;
+  return Diagrama.parse(elements);
+}
