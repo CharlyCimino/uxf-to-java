@@ -40,8 +40,8 @@ class Atributo {
           /^(_)?\s*/,                                    // static (opcional)
           /([-+#]?)\s*/,                                  // Visibilidad (opcional)
           /([a-zA-Z](?:[a-zA-Z0-9_]*[a-zA-Z0-9])?)\s*/,   // Identificador
-          /(?::(\s*[a-zA-Z0-9]+))?\s*/,                   // Tipo (opcional)
-          /(?:=(\s*[a-zA-Z0-9"'.]+))?\s*/,                // Valor (opcional)
+          /(?::(\s*[a-zA-Z0-9<>]+))?\s*/,                   // Tipo (opcional)
+          /(?:=(\s*[a-zA-Z0-9"'. ]+))?\s*/,                // Valor (opcional)
           /_?/,                                            // Cierre de static (opcional)
           /$/,                                             // Fin de línea
       ]);
