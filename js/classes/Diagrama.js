@@ -5,7 +5,7 @@ class Diagrama {
         this.relaciones = relaciones;
     }
 
-    static parse(elements) {
+    static parse(nombre, elements) {
         const datos = (elements.map(elem => { return { 
             id: elem.id[0]._text, 
             data: elem.panel_attributes[0]._text, 
@@ -19,7 +19,7 @@ class Diagrama {
         const clases = Diagrama.procesarClases(clasesSinProcesar);
         const relaciones = Diagrama.procesarRelaciones(relacionesSinProcesar);
         //console.log(relaciones);
-        return new Diagrama("Nombre no decidido", clases, relaciones);
+        return new Diagrama(nombre, clases, relaciones);
     }
 
     static procesarClases(clasesSinProcesar) {
