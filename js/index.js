@@ -33,9 +33,17 @@ function procesarArchivos(archivos) {
     const diagramas = res.map((xmlAsJson, i) => xmlToClassDiagram(getFileName(i), xmlAsJson));
     const results = document.querySelector("#results");
     diagramas.forEach(diagrama => {
+      console.log(diagrama)
       const javaResult = diagrama.toJava();
       if (javaResult) {
-        results.innerHTML += `<h2>${diagrama.nombre}</h2><pre><code class="language-java">${javaResult}</code></pre>`;
+        // <pre><code class="language-java">${javaResult}</code></pre>
+        const preNode = document.createElement("pre");
+        const codeNode = document.createElement("code");
+        codeNode.classList.add('language-java');
+        codeNode.textContent = javaResult;
+        preNode.appendChild(codeNode);
+        results.innerHTML += `<h2>${diagrama.nombre}</h2>`;
+        results.appendChild(preNode);
       }
     });
     hljs.highlightAll();

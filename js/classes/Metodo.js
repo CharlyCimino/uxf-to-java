@@ -28,27 +28,37 @@ class Metodo {
         let match = Metodo.getRegex().exec(cad);
         if (!match) throw new Error(`No se pudo parsear método '${cad}' de la clase ${nombreClase}\n${REVISAR_SINTAXIS}`);
 
-        let [, visibilidad, nombre, , retorno] = match;
+        let [, visibilidad, nombre, listaDeParametros , retorno] = match;
 
-        
-        visibilidad = resolverVisibilidad(match[1]?.trim());
-        nombre = match[2]?.trim();
-        retorno = match[4] ? match[4].trim() : 'void';
+        visibilidad = resolverVisibilidad(visibilidad?.trim());
+        nombre = nombre?.trim();
+        retorno = retorno ? retorno.trim() : 'void';
         esConstructor = nombreClase === nombre;
 
         parametros = [];
-        if (match[3]) {
-            let parametrosText = match[3].trim().split(',');
+        if (listaDeParametros) {
+            let parametrosText = listaDeParametros.trim().split(',');
             parametros = parametrosText.map((parametro, i) => {
                 let partes = parametro.trim().split(':');
-                if (partes.length === 2) {
-                    return { nombre: partes[0].trim(), tipo: partes[1].trim() };
+                partes = partes.map(p => p.trim());
+                const { 0: nombre, 1: tipo } = partes;
+                if (tipo) {
+                    return { nombre, tipo };
                 } else {
-                    return { nombre: `${partes[0].trim().toLowerCase()}${(i + 1)}`, tipo: partes[0].trim() };
+                    let nombreParametro;
+                    if (nombre.includes('<')) {
+                        nombreParametro = nombre.substring(0, nombre.indexOf('<'));
+                    } else {
+                        nombreParametro = `${nombre}${(i + 1)}`;
+                    }
+                    return {
+                        nombre: nombreParametro.toLowerCase(),
+                        tipo: nombre
+                    };
                 }
             });
         }
-        return new Metodo(visibilidad, nombre, esStatic, esAbstract, esConstructor, parametros, retorno);;
+        return new Metodo(visibilidad, nombre, esStatic, esAbstract, esConstructor, parametros, retorno);
     }
 
     static getRegex() {
@@ -57,13 +67,13 @@ class Metodo {
             /([-+#]?)\s*/,                                      // Visibilidad (opcional)
             /([a-zA-Z0-9]+)/,                                  // Identificador
             /\s*\(\s*/,                                         // Paréntesis de apertura
-            /((?:(?:(?:[a-zA-Z0-9]+\s*(?:,\s*[a-zA-Z0-9]+)*))|(?:[a-zA-Z0-9]+\s*(?::\s*[a-zA-Z0-9]+)?\s*(?:,\s*[a-zA-Z0-9]+\s*(?::\s*[a-zA-Z0-9]+)?)*))?)/,
+            /((?:(?:(?:[a-zA-Z0-9<>]+\s*(?:,\s*[a-zA-Z0-9<>]+)*))|(?:[a-zA-Z0-9<>]+\s*(?::\s*[a-zA-Z0-9<>]+)?\s*(?:,\s*[a-zA-Z0-9<>]+\s*(?::\s*[a-zA-Z0-9<>]+)?)*))?)/,
             /\s*\)\s*/,                                         // Paréntesis de cierre
-            /(?::\s*([a-zA-Z0-9]+))?/,                           // :Retorno (opcional)
+            /(?::\s*([a-zA-Z0-9<>]+))?/,                           // :Retorno (opcional)
             /(?:\s*(?:_|\/)?)/,                                 // Abstract o static (opcional)
             /$/,                                                // Fin de línea
         ]);
-    }    
+    }
 
     toJava() {
         let javaCode = `\t${this.visibilidad}`;
