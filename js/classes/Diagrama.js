@@ -17,9 +17,9 @@ class Diagrama {
         const relacionesSinProcesar = datos.filter(elem => elem.id === "Relation");
 
         const clases = Diagrama.procesarClases(clasesSinProcesar);
-        const relaciones = Diagrama.procesarRelaciones(relacionesSinProcesar);
+        //const relaciones = Diagrama.procesarRelaciones(relacionesSinProcesar);
         //console.log(relaciones);
-        return new Diagrama(nombre, clases, relaciones);
+        return new Diagrama(nombre, clases, undefined); // Faltan relaciones
     }
 
     static procesarClases(clasesSinProcesar) {

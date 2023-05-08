@@ -67,7 +67,7 @@ class Metodo {
             /([-+#]?)\s*/,                                      // Visibilidad (opcional)
             /([a-zA-Z0-9]+)/,                                  // Identificador
             /\s*\(\s*/,                                         // Paréntesis de apertura
-            /((?:(?:(?:[a-zA-Z0-9<>]+\s*(?:,\s*[a-zA-Z0-9<>]+)*))|(?:[a-zA-Z0-9<>]+\s*(?::\s*[a-zA-Z0-9<>]+)?\s*(?:,\s*[a-zA-Z0-9<>]+\s*(?::\s*[a-zA-Z0-9<>]+)?)*))?)/,
+            /((?:(?:(?:[a-zA-Z0-9<>? ]+\s*(?:,\s*[a-zA-Z0-9<>? ]+)*))|(?:[a-zA-Z0-9<>? ]+\s*(?::\s*[a-zA-Z0-9<>? ]+)?\s*(?:,\s*[a-zA-Z0-9<>? ]+\s*(?::\s*[a-zA-Z0-9<>? ]+)?)*))?)/,
             /\s*\)\s*/,                                         // Paréntesis de cierre
             /(?::\s*([a-zA-Z0-9<>]+))?/,                           // :Retorno (opcional)
             /(?:\s*(?:_|\/)?)/,                                 // Abstract o static (opcional)
