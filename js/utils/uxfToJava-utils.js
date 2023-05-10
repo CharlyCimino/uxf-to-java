@@ -29,3 +29,7 @@ function resolverVisibilidad(cad) {
     }
     return vis;
 }
+
+function dataElementoToArray(cad) {
+    return cad.replaceAll('  ', '').split('\n').filter(x => x !== '')
+}

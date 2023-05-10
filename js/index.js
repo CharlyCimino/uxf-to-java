@@ -1,9 +1,3 @@
-
-
-function procesarXml(xmlObject) {
-
-}
-
 function loadFiles() {
   const input = document.getElementById("inputUxf");
   const reader = new FileReader();
@@ -36,7 +30,6 @@ function procesarArchivos(archivos) {
       console.log(diagrama)
       const javaResult = diagrama.toJava();
       if (javaResult) {
-        // <pre><code class="language-java">${javaResult}</code></pre>
         const preNode = document.createElement("pre");
         const codeNode = document.createElement("code");
         codeNode.classList.add('language-java');
@@ -61,10 +54,14 @@ function getFiles() {
 
 function getFileName(i) {
   // "Archivo.uxf" --> "Archivo"
-  return getFiles()[i].name.split(".")[0];
+  //return getFiles()[i].name.split(".")[0];
+  return "Test";
 }
 
 function xmlToClassDiagram(filename, xmlAsJson) {
   const elements = xmlAsJson.diagram[0].element;
   return Diagrama.parse(filename,elements);
 }
+
+
+procesarArchivos([UML_TEST]);
