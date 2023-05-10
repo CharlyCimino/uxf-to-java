@@ -12,9 +12,11 @@ class Relacion {
 
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
         if (!match) throw new Error(`No se pudo parsear la relación dada por el tipo de flecha: '${tipoFlecha}'\n${REVISAR_SINTAXIS_LETINO}`);
+        tipoFlecha = match[1]; // Sin el 'lt='
 
         match = Relacion.getCardinalidadRegex().exec(cardinalidad);
         if (!match) throw new Error(`No se pudo parsear la cardinalidad '${cardinalidad}' de la relación dada por el tipo de flecha '${tipoFlecha}'\n${REVISAR_SINTAXIS_LETINO}`);
+        cardinalidad = match[1]; // Sin el 'm1='
 
         /*if (tipoFlecha.includes('>>') || tipoFlecha.includes('<<')) {
             return RelacionHerencia.parse(tipoFlecha, coord);
@@ -28,7 +30,7 @@ class Relacion {
 
     static getTipoFlechaRegex() {
         return createRegex([
-            /^lt=(<(?:(?:\-(?:>{4,5})?)|(?:\.+)|(?:<[\-\.])))\s*$/
+            /^(?:lt=)(<(?:(?:\-(?:>{4,5})?)|(?:\.+)|(?:<[\-\.])))\s*$/
         ]);
     }
 
