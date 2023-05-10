@@ -18,14 +18,12 @@ class Relacion {
         if (!match) throw new Error(`No se pudo parsear la cardinalidad '${cardinalidad}' de la relación dada por el tipo de flecha '${tipoFlecha}'\n${REVISAR_SINTAXIS_LETINO}`);
         cardinalidad = match[1]; // Sin el 'm1='
 
-        /*if (tipoFlecha.includes('>>') || tipoFlecha.includes('<<')) {
-            return RelacionHerencia.parse(tipoFlecha, coord);
-        } else if (tipoFlecha.includes('->') || tipoFlecha.includes('<-')) {
-            return RelacionAsociacion.parse(tipoFlecha, cardinalidad, nombreRelacion, coord);
-        } else {
-            return 'dependencia';
-        }*/
-        return { coord, tipoFlecha, cardinalidad, nombreRelacion }
+        let relacion = RelacionFactory.crearRelacion(tipoFlecha, coord);
+        if (relacion instanceof RelacionDeAsociacion) {
+            relacion.cardinalidad = cardinalidad;
+            relacion.nombreRelacion = nombreRelacion;
+        }
+        return relacion;
     }
 
     static getTipoFlechaRegex() {

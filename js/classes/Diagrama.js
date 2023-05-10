@@ -18,8 +18,7 @@ class Diagrama {
 
         const clases = Diagrama.procesarClases(clasesSinProcesar);
         const relaciones = Diagrama.procesarRelaciones(relacionesSinProcesar);
-        console.log(relaciones);
-        return new Diagrama(nombre, clases, undefined); // Faltan relaciones
+        return new Diagrama(nombre, clases, relaciones);
     }
 
     static procesarClases(clasesSinProcesar) {
@@ -37,7 +36,7 @@ class Diagrama {
             const data = dataElementoToArray(relItem.data);
             relaciones.push(Relacion.parse(data, relItem.coord));
           });
-        return relaciones.filter(r => r !== "dependencia");
+        return relaciones.filter(Boolean); // Elimina los 'undefined'
     }
 
     toJava() {
