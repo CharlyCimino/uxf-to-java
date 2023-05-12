@@ -27,7 +27,6 @@ function procesarArchivos(archivos) {
     const diagramas = res.map((xmlAsJson, i) => xmlToClassDiagram(getFileName(i), xmlAsJson));
     const results = document.querySelector("#results");
     diagramas.forEach(diagrama => {
-      console.log(diagrama)
       const javaResult = diagrama.toJava();
       if (javaResult) {
         const preNode = document.createElement("pre");
@@ -61,7 +60,7 @@ function getFileName(i) {
 function xmlToClassDiagram(filename, xmlAsJson) {
   const zoomLevel = xmlAsJson?.diagram[0]?.zoom_level[0]?._text;
   const elements = xmlAsJson?.diagram[0]?.element;
-  return Diagrama.parse(filename,zoomLevel,elements);
+  return Diagrama.parse(filename,parseInt(zoomLevel),elements);
 }
 
 

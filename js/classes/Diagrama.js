@@ -4,11 +4,10 @@ class Diagrama {
         this.clases = [];
         this.relaciones = [];
         this.zoom = zoom;
-        
-        this.clases = Diagrama.procesarClases(clasesSinProcesar);
-        this.relaciones = Diagrama.procesarRelaciones(relacionesSinProcesar);
+        this.clases = this.procesarClases(clasesSinProcesar);
+        this.relaciones = this.procesarRelaciones(relacionesSinProcesar);
         this.transformarRelacionesACodigo();
-        console.log(`el zoom es ${this.zoom}`)
+        console.log(this);
     }
 
     transformarRelacionesACodigo() {
@@ -35,11 +34,10 @@ class Diagrama {
         }}));
         const clasesSinProcesar = datos.filter(elem => elem.id === "UMLClass");
         const relacionesSinProcesar = datos.filter(elem => elem.id === "Relation");
-        
         return new Diagrama(nombre, zoomLevel, clasesSinProcesar, relacionesSinProcesar);
     }
 
-    static procesarClases(clasesSinProcesar) {
+    procesarClases(clasesSinProcesar) {
         const clases = [];
         clasesSinProcesar.forEach(clazzItem => {
             const data = dataElementoToArray(clazzItem.panelAttributes);
@@ -48,11 +46,11 @@ class Diagrama {
         return clases;
     }
 
-    static procesarRelaciones(relacionesSinProcesar) {
+    procesarRelaciones(relacionesSinProcesar) {
         const relaciones = [];
         relacionesSinProcesar.forEach(relItem => {
             const data = dataElementoToArray(relItem.panelAttributes);
-            relaciones.push(Relacion.parse(data, relItem.additionalAttributes, relItem.coord));
+            relaciones.push(Relacion.parse(data, relItem.additionalAttributes, relItem.coord, this.zoom));
           });
         return relaciones.filter(Boolean); // Elimina los 'undefined'
     }

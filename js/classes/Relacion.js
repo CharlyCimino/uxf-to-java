@@ -1,5 +1,4 @@
 class Relacion {
-    
 
     constructor(rectangulo) {
         this.rectangulo = rectangulo;
@@ -7,7 +6,7 @@ class Relacion {
         this.claseDestino = "pendiente";
     }
 
-    static parse(panelAttributes, additionalAttributes, coord) {
+    static parse(panelAttributes, additionalAttributes, coord, zoom) {
 
         //console.log(relItem);
 
@@ -24,8 +23,8 @@ class Relacion {
         const rect = new Rectangulo(coord);
         let valoresIndividuales = additionalAttributes.split(";")
         for (let i = 0; i < valoresIndividuales.length; i += 2) {
-            const x = parseInt(valoresIndividuales[i]);
-            const y = parseInt(valoresIndividuales[i + 1]);
+            const x = parseInt(valoresIndividuales[i]) * (zoom / 10);
+            const y = parseInt(valoresIndividuales[i + 1]) * (zoom / 10);
             rect.agregarPuntoDeRelacion({ x, y });
         }
         
