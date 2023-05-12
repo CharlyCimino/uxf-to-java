@@ -1,14 +1,17 @@
 class Relacion {
-    constructor(coord, claseOrigen, claseDestino) {
-        this.coord = coord;
-        this.claseOrigen = claseOrigen;
-        this.claseDestino = claseDestino;
+    
+
+    constructor(rectangulo) {
+        this.rectangulo = rectangulo;
+        this.claseOrigen = "pendiente";
+        this.claseDestino = "pendiente";
     }
-    static parse(relItem, coord) {
 
-        console.log(relItem);
+    static parse(panelAttributes, additionalAttributes, coord) {
 
-        let [tipoFlecha, cardinalidad = "1", nombreRelacion = ""] = relItem;
+        //console.log(relItem);
+
+        let [tipoFlecha, cardinalidad = "1", nombreRelacion = ""] = panelAttributes;
 
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
         if (!match) throw new Error(`No se pudo parsear la relación dada por el tipo de flecha: '${tipoFlecha}'\n${REVISAR_SINTAXIS_LETINO}`);
@@ -18,11 +21,22 @@ class Relacion {
         if (!match) throw new Error(`No se pudo parsear la cardinalidad '${cardinalidad}' de la relación dada por el tipo de flecha '${tipoFlecha}'\n${REVISAR_SINTAXIS_LETINO}`);
         cardinalidad = match[1]; // Sin el 'm1='
 
-        let relacion = RelacionFactory.crearRelacion(tipoFlecha, coord);
-        if (relacion instanceof RelacionDeAsociacion) {
-            relacion.cardinalidad = cardinalidad;
-            relacion.nombreRelacion = nombreRelacion;
+        const rect = new Rectangulo(coord);
+        let valoresIndividuales = additionalAttributes.split(";")
+        for (let i = 0; i < valoresIndividuales.length; i += 2) {
+            const x = parseInt(valoresIndividuales[i]);
+            const y = parseInt(valoresIndividuales[i + 1]);
+            rect.agregarPuntoDeRelacion({ x, y });
         }
+        
+        let relacion = RelacionFactory.crearRelacion(tipoFlecha, rect);
+        if (relacion instanceof RelacionDeAsociacion) {
+            relacion.nombre = nombreRelacion;
+            relacion.cardinalidad = cardinalidad;
+        }
+
+        
+
         return relacion;
     }
 

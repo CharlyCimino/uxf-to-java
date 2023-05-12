@@ -1,7 +1,7 @@
 class RelacionDeAsociacion extends Relacion {
-    constructor(coord, claseOrigen, claseDestino, cardinalidad, nombreRelacion) {   
-        super(coord, claseOrigen, claseDestino);
+    constructor(rectangulo, puntos, cardinalidad, nombre) {   
+        super(rectangulo, puntos);
         this.cardinalidad = cardinalidad;
-        this.nombreRelacion = nombreRelacion;
+        this.nombre = nombre;
     }
 }

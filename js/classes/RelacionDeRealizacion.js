@@ -1,5 +1,5 @@
 class RelacionDeRealizacion extends RelacionDeGeneralizacion {
-    constructor(coord, claseOrigen, claseDestino) {   
-        super(coord, claseOrigen, claseDestino);
+    constructor(rectangulo, puntos) {   
+        super(rectangulo, puntos);
     }
 }

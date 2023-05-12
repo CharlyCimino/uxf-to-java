@@ -1,17 +1,17 @@
 class RelacionFactory {
-    static crearRelacion(tipoFlecha, coord) {
+    static crearRelacion(tipoFlecha, rectangulo) {
         let rel;
         switch (tipoFlecha) {
             case "<-":
             case "<->>>>":
             case "<->>>>>":
-                rel = new RelacionDeAsociacion(coord);
+                rel = new RelacionDeAsociacion(rectangulo);
                 break;
             case "<<-":
-                rel = new RelacionDeGeneralizacion(coord);
+                rel = new RelacionDeGeneralizacion(rectangulo);
                 break;
             case "<<.":
-                rel = new RelacionDeRealizacion(coord);
+                rel = new RelacionDeRealizacion(rectangulo);
                 break;
         }
         return rel;

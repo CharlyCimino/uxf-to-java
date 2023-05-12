@@ -1,10 +1,10 @@
 class Clase {
-    constructor(tipo = '', nombre = '', atributos = [], metodos = [], coord) {
+    constructor(tipo = '', nombre = '', atributos = [], metodos = [], rectangulo) {
         this.tipo = tipo;
         this.nombre = nombre;
         this.atributos = atributos;
         this.metodos = metodos;
-        this.coord = coord;
+        this.rectangulo = rectangulo;
         this.atributos = this.atributos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
         this.metodos = this.metodos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
     }
@@ -40,7 +40,7 @@ class Clase {
         }
         metodos = metodosSinProcesar.map(m => Metodo.parse(m, nombre));
 
-        return new Clase(tipo, nombre, atributos, metodos, new Coordenada(coord));
+        return new Clase(tipo, nombre, atributos, metodos, new Rectangulo(coord));
     }
 
     static resolverTipoYNombreDeElemento(clazzItem) {
@@ -67,6 +67,10 @@ class Clase {
             tipo = 'enum';
         }
         return tipo;
+    }
+
+    esConectadaPor(puntoDeRelacion) {
+        return this.rectangulo.esConectadoPor(puntoDeRelacion);
     }
 
     toJava() {

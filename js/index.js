@@ -54,14 +54,15 @@ function getFiles() {
 
 function getFileName(i) {
   // "Archivo.uxf" --> "Archivo"
-  //return getFiles()[i].name.split(".")[0];
+  return getFiles()[i].name.split(".")[0];
   return "Test";
 }
 
 function xmlToClassDiagram(filename, xmlAsJson) {
-  const elements = xmlAsJson.diagram[0].element;
-  return Diagrama.parse(filename,elements);
+  const zoomLevel = xmlAsJson?.diagram[0]?.zoom_level[0]?._text;
+  const elements = xmlAsJson?.diagram[0]?.element;
+  return Diagrama.parse(filename,zoomLevel,elements);
 }
 
 
-procesarArchivos([UML_TEST]);
+//procesarArchivos([UML_TEST]);
