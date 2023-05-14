@@ -9,6 +9,6 @@ class RelacionDeGeneralizacion extends Relacion {
 
     actualizarClases() {
         this.checkClases();
-        console.log("actualizarClases de RelacionDeGeneralizacion");
+        this.claseOrigen.addSuperclase(this.claseDestino);
     }
 }

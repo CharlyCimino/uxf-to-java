@@ -5,6 +5,7 @@ class Clase {
         this.atributos = atributos;
         this.metodos = metodos;
         this.rectangulo = rectangulo;
+        this.superclase = undefined;
         this.atributos = this.atributos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
         this.metodos = this.metodos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
     }
@@ -13,12 +14,24 @@ class Clase {
         this.atributos.push(a);
     }
 
+    addSuperclase(sc) {
+        if (this.superclase) {
+            throw new Error(`La clase ${this.nombre} ya es hija de ${this.superclase.nombre}, no puede serlo también de ${sc.nombre}. Java no soporta herencia múltiple.`);
+        }
+        this.superclase = sc;
+    }
+
+
     esConectadaPor(puntoDeRelacion) {
         return this.rectangulo.esConectadoPor(puntoDeRelacion);
     }
 
     toJava() {
-        let javaCode = `public ${this.tipo} ${this.nombre} {\n\n\t`;
+        let javaCode = `public ${this.tipo} ${this.nombre}`;
+        if (this.superclase) {
+            javaCode += ` extends ${this.superclase.nombre}`;
+        }
+        javaCode += " {\n\n\t";
         if (this.tipo === "enum") {
             const atrsEnum = this.atributos.filter(at => at instanceof AtributoEnum);
             atrsEnum.forEach( atEnum => {

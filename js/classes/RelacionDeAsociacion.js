@@ -19,7 +19,7 @@ class RelacionDeAsociacion extends Relacion {
     definirAtributoUML() {
         let tipo = this.claseDestino.nombre;
         if (this.cardinalidad.includes("*") || this.cardinalidad.includes("n")) {
-            tipo = `${TIPO_COLECCION}<${tipo}>`;
+            tipo = `${RelacionDeAsociacion.TIPO_COLECCION}<${tipo}>`;
         }
         return Atributo.parse(`${this.nombre}: ${tipo}`);
     }
