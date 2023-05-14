@@ -6,6 +6,7 @@ class Clase {
         this.metodos = metodos;
         this.rectangulo = rectangulo;
         this.superclase = undefined;
+        this.interfaces = [];
         this.atributos = this.atributos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
         this.metodos = this.metodos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
     }
@@ -21,6 +22,9 @@ class Clase {
         this.superclase = sc;
     }
 
+    addInterfaz(interf) {
+        this.interfaces.push(interf);
+    }
 
     esConectadaPor(puntoDeRelacion) {
         return this.rectangulo.esConectadoPor(puntoDeRelacion);
@@ -30,6 +34,15 @@ class Clase {
         let javaCode = `public ${this.tipo} ${this.nombre}`;
         if (this.superclase) {
             javaCode += ` extends ${this.superclase.nombre}`;
+        }
+        if (this.interfaces.length > 0) {
+            javaCode += ` implements `;
+            this.interfaces.forEach( interf => {
+                javaCode += interf.nombre + ", ";
+            });
+            if (this.interfaces.length > 0) {
+                javaCode = javaCode.substring(0, javaCode.length - 2); // Quita última coma
+            } 
         }
         javaCode += " {\n\n\t";
         if (this.tipo === "enum") {
@@ -105,9 +118,9 @@ class Clase {
 
     static resolverTipoDeElemento(cad) {
         let tipo = "class";
-        if (cad.includes("interf")) {
+        if (cad.match(/interf/i)) {
             tipo = 'interface';
-        } else if (cad.includes('enum')) {
+        } else if (cad.match(/enum/i)) {
             tipo = 'enum';
         }
         return tipo;

@@ -9,6 +9,6 @@ class RelacionDeRealizacion extends RelacionDeGeneralizacion {
 
     actualizarClases() {
         this.checkClases();
-        console.log("actualizarClases de RelacionDeRealizacion");
+        this.claseOrigen.addInterfaz(this.claseDestino);
     }
 }
