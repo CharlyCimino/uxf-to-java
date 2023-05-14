@@ -11,6 +11,11 @@ class Diagrama {
     }
 
     transformarRelacionesACodigo() {
+        this.conectarRelacionesConClases();
+        this.actualizarClasesSegunRelaciones();
+    }    
+
+    conectarRelacionesConClases() {
         this.relaciones.forEach(rel => {
             let claseEncontrada = this.clases.find(c => c.esConectadaPor(rel.rectangulo.puntoDeOrigen()))
             if (claseEncontrada) {
@@ -21,21 +26,19 @@ class Diagrama {
                 rel.claseDestino = claseEncontrada;
             }
         })
-    }
+    }    
 
-    static parse(nombre, zoomLevel, elements) {
-        const datos = (elements.map(elem => { return { 
-            id: elem.id[0]._text, 
-            panelAttributes: elem.panel_attributes[0]?._text, 
-            additionalAttributes: elem.additional_attributes[0]?._text,
-            coord: Object.fromEntries(
-                Object.entries(elem.coordinates[0]).map(([key, value]) => [key, parseInt(value[0]._text)])
-              )
-        }}));
-        const clasesSinProcesar = datos.filter(elem => elem.id === "UMLClass");
-        const relacionesSinProcesar = datos.filter(elem => elem.id === "Relation");
-        return new Diagrama(nombre, zoomLevel, clasesSinProcesar, relacionesSinProcesar);
-    }
+    actualizarClasesSegunRelaciones() {
+        this.relaciones.forEach(rel => {
+            if (rel.claseOrigen === "pendiente") {
+                throw new Error(`No se pudo encontrar una clase para el origen de ${rel.toString()}`);
+            }
+            if (rel.claseDestino === "pendiente") {
+                throw new Error(`No se pudo encontrar una clase para el destino de ${rel.toString()}`);
+            }
+            
+        })
+    } 
 
     procesarClases(clasesSinProcesar) {
         const clases = [];
@@ -63,5 +66,19 @@ class Diagrama {
         })
 
         return javaResult;
+    }
+
+    static parse(nombre, zoomLevel, elements) {
+        const datos = (elements.map(elem => { return { 
+            id: elem.id[0]._text, 
+            panelAttributes: elem.panel_attributes[0]?._text, 
+            additionalAttributes: elem.additional_attributes[0]?._text,
+            coord: Object.fromEntries(
+                Object.entries(elem.coordinates[0]).map(([key, value]) => [key, parseInt(value[0]._text)])
+              )
+        }}));
+        const clasesSinProcesar = datos.filter(elem => elem.id === "UMLClass");
+        const relacionesSinProcesar = datos.filter(elem => elem.id === "Relation");
+        return new Diagrama(nombre, zoomLevel, clasesSinProcesar, relacionesSinProcesar);
     }
 }

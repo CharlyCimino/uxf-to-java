@@ -8,8 +8,6 @@ class Relacion {
 
     static parse(panelAttributes, additionalAttributes, coord, zoom) {
 
-        //console.log(relItem);
-
         let [tipoFlecha, cardinalidad = "1", nombreRelacion = ""] = panelAttributes;
 
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
@@ -33,8 +31,6 @@ class Relacion {
             relacion.nombre = nombreRelacion;
             relacion.cardinalidad = cardinalidad;
         }
-
-        
 
         return relacion;
     }
