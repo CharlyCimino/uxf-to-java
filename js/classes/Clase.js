@@ -32,37 +32,61 @@ class Clase {
 
     toJava() {
         let javaCode = `public ${this.tipo} ${this.nombre}`;
-        if (this.superclase) {
-            javaCode += ` extends ${this.superclase.nombre}`;
+        javaCode = this.escribirSuperclase(javaCode);
+        javaCode = this.escribirInterfaces(javaCode);
+        javaCode += " {\n\n\t";
+        javaCode = this.escribirValoresEnum(javaCode);
+        javaCode = this.escribirAtributos(javaCode);
+        javaCode += "\n";
+        javaCode = this.escribirMetodos(javaCode);
+        javaCode += "}";
+        return javaCode;
+    }
+
+    escribirMetodos(javaCode) {
+        this.metodos.forEach(me => {
+            javaCode += me.toJava() + "\n\n";
+        });
+        return javaCode;
+    }
+
+    escribirAtributos(javaCode) {
+        this.atributos.filter(at => at instanceof Atributo).forEach(at => {
+            javaCode += at.toJava() + "\n\t";
+        });
+        return javaCode;
+    }
+
+    escribirValoresEnum(javaCode) {
+        if (this.tipo === "enum") {
+            const atrsEnum = this.atributos.filter(at => at instanceof AtributoEnum);
+            atrsEnum.forEach(atEnum => {
+                javaCode += atEnum.toJava() + ",\n\t";
+            });
+            if (atrsEnum.length > 0) {
+                javaCode = javaCode.substring(0, javaCode.length - 3) + ";\n\t"; // Quita última coma
+            }
         }
+        return javaCode;
+    }
+
+    escribirInterfaces(javaCode) {
         if (this.interfaces.length > 0) {
             javaCode += ` implements `;
-            this.interfaces.forEach( interf => {
+            this.interfaces.forEach(interf => {
                 javaCode += interf.nombre + ", ";
             });
             if (this.interfaces.length > 0) {
                 javaCode = javaCode.substring(0, javaCode.length - 2); // Quita última coma
-            } 
+            }
         }
-        javaCode += " {\n\n\t";
-        if (this.tipo === "enum") {
-            const atrsEnum = this.atributos.filter(at => at instanceof AtributoEnum);
-            atrsEnum.forEach( atEnum => {
-                javaCode += atEnum.toJava() + ",\n\t"
-            })
-            if (atrsEnum.length > 0) {
-                javaCode = javaCode.substring(0, javaCode.length - 3) + ";\n\t"; // Quita última coma
-            } 
-        }
+        return javaCode;
+    }
 
-        this.atributos.filter(at => at instanceof Atributo).forEach(at => {
-            javaCode += at.toJava() + "\n\t";
-        });
-        javaCode += "\n";
-        this.metodos.forEach(me => {
-            javaCode += me.toJava() + "\n\n";
-        });
-        javaCode += "}";
+    escribirSuperclase(javaCode) {
+        if (this.superclase) {
+            javaCode += ` extends ${this.superclase.nombre}`;
+        }
         return javaCode;
     }
 

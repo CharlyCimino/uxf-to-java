@@ -8,8 +8,20 @@ class Atributo {
     this.valor = valor.trim();
   }
 
-  static order() {
-    return 2;
+  toJava() {
+    let javaCode = this.visibilidad;
+    if (this.esStatic) {
+      javaCode += 'static ';
+    }
+    if (this.esFinal) {
+      javaCode += 'final ';
+    }
+    javaCode += this.tipo + ' ' + this.nombre;
+    if (this.valor) {
+      javaCode += ' = ' + this.valor;
+    }
+    javaCode += ';';
+    return javaCode;
   }
 
   static parse(cad, nombreClase) {
@@ -47,19 +59,5 @@ class Atributo {
     ]);
   }
 
-  toJava() {
-    let javaCode = this.visibilidad;
-    if (this.esStatic) {
-      javaCode += 'static ';
-    }
-    if (this.esFinal) {
-      javaCode += 'final ';
-    }
-    javaCode += this.tipo + ' ' + this.nombre;
-    if (this.valor) {
-      javaCode += ' = ' + this.valor;
-    }
-    javaCode += ';';
-    return javaCode;
-  }
+  
 }

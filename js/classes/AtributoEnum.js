@@ -4,8 +4,12 @@ class AtributoEnum {
         this.valoresEntreParentesis = valoresEntreParentesis.trim();
     }
 
-    static order() {
-        return 1;
+    toJava() {
+        let javaCode = this.nombre;
+        if (this.valoresEntreParentesis) {
+            javaCode += `${this.valoresEntreParentesis}`;
+        }
+        return javaCode;
     }
 
     static parse(cad, nombreClase) {
@@ -33,13 +37,5 @@ class AtributoEnum {
             /_?/,                                            // Cierre de static (opcional)
             /$/,                                             // Fin de línea
         ]);
-    }   
-
-    toJava() {
-        let javaCode = this.nombre;
-        if (this.valoresEntreParentesis) {
-            javaCode += `${this.valoresEntreParentesis}`;
-        }
-        return javaCode;
-    }
+    }      
 }

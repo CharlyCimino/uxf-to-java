@@ -9,8 +9,38 @@ class Metodo {
         this.retorno = retorno;
     }
 
-    static order() {
-        return 4;
+    toJava() {
+        let javaCode = `\t${this.visibilidad}`;
+        if (this.esStatic) javaCode += "static ";
+        if (this.esAbstract) javaCode += "abstract ";
+        javaCode += this.esConstructor ? "" : `${this.retorno} `;
+        javaCode += `${this.nombre}(`;
+        javaCode = this.escribirListaDeParametros(javaCode);
+        javaCode += ")";
+        javaCode = this.escribirImplementacion(javaCode);
+        return javaCode;
+    }
+
+    escribirImplementacion(javaCode) {
+        if (this.esAbstract) {
+            javaCode += ";"; // Los métodos abstractos no llevan implementación
+        } else {
+            javaCode += " {\n\t\t// A resolver...\n\t}";
+        }
+        return javaCode;
+    }
+
+    escribirListaDeParametros(javaCode) {
+        if (this.parametros.length > 0) {
+            for (let i = 0; i < this.parametros.length; i++) {
+                let parametro = this.parametros[i];
+                javaCode += `${parametro.tipo} ${parametro.nombre}`;
+                if (i !== this.parametros.length - 1) {
+                    javaCode += ", ";
+                }
+            }
+        }
+        return javaCode;
     }
 
     static parse(cad, nombreClase) {
@@ -75,27 +105,5 @@ class Metodo {
         ]);
     }
 
-    toJava() {
-        let javaCode = `\t${this.visibilidad}`;
-        if (this.esStatic) javaCode += "static ";
-        if (this.esAbstract) javaCode += "abstract ";
-        javaCode += this.esConstructor ? "" : `${this.retorno} `;
-        javaCode += `${this.nombre}(`;
-        if (this.parametros.length > 0) {
-            for (let i = 0; i < this.parametros.length; i++) {
-                let parametro = this.parametros[i];
-                javaCode += `${parametro.tipo} ${parametro.nombre}`;
-                if (i !== this.parametros.length - 1) {
-                    javaCode += ", ";
-                }
-            }
-        }
-        javaCode += ")";
-        if (this.esAbstract) {
-            javaCode += ";";
-        } else {
-            javaCode += " {\n\t\t// A resolver...\n\t}";
-        }
-        return javaCode;
-    }
+    
 }
