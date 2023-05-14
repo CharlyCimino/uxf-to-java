@@ -4,7 +4,7 @@ class RelacionDeRealizacion extends RelacionDeGeneralizacion {
     }
 
     toString() {
-        return `Relación de realización (de interfaz)`;
+        return `relación de realización (de interfaz)`;
     }
 
     actualizarClases() {

@@ -9,6 +9,37 @@ class Clase {
         this.metodos = this.metodos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
     }
 
+    addAtributo(a) {
+        this.atributos.push(a);
+    }
+
+    esConectadaPor(puntoDeRelacion) {
+        return this.rectangulo.esConectadoPor(puntoDeRelacion);
+    }
+
+    toJava() {
+        let javaCode = `public ${this.tipo} ${this.nombre} {\n\n\t`;
+        if (this.tipo === "enum") {
+            const atrsEnum = this.atributos.filter(at => at instanceof AtributoEnum);
+            atrsEnum.forEach( atEnum => {
+                javaCode += atEnum.toJava() + ",\n\t"
+            })
+            if (atrsEnum.length > 0) {
+                javaCode = javaCode.substring(0, javaCode.length - 3) + ";\n\t"; // Quita última coma
+            } 
+        }
+
+        this.atributos.filter(at => at instanceof Atributo).forEach(at => {
+            javaCode += at.toJava() + "\n\t";
+        });
+        javaCode += "\n";
+        this.metodos.forEach(me => {
+            javaCode += me.toJava() + "\n\n";
+        });
+        javaCode += "}";
+        return javaCode;
+    }
+
     static parse(clazzItem, coord) {
         let tipo = '', nombre = '', atributos = [], metodos = [];
 
@@ -67,35 +98,5 @@ class Clase {
             tipo = 'enum';
         }
         return tipo;
-    }
-
-    esConectadaPor(puntoDeRelacion) {
-        return this.rectangulo.esConectadoPor(puntoDeRelacion);
-    }
-
-    toJava() {
-
-        let javaCode = `public ${this.tipo} ${this.nombre} {\n\n\t`;
-        if (this.tipo === "enum") {
-            const atrsEnum = this.atributos.filter(at => at instanceof AtributoEnum);
-            atrsEnum.forEach( atEnum => {
-                javaCode += atEnum.toJava() + ",\n\t"
-            })
-            if (atrsEnum.length > 0) {
-                javaCode = javaCode.substring(0, javaCode.length - 3) + ";\n\t"; // Quita última coma
-            } 
-        }
-
-        this.atributos.filter(at => at instanceof Atributo).forEach(at => {
-            javaCode += at.toJava() + "\n\t";
-        });
-        javaCode += "\n";
-        this.metodos.forEach(me => {
-            javaCode += me.toJava() + "\n\n";
-        });
-        javaCode += "}";
-
-        return javaCode;
-
     }
 }

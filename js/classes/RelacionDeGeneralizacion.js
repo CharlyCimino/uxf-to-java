@@ -4,7 +4,7 @@ class RelacionDeGeneralizacion extends Relacion {
     }
 
     toString() {
-        return `Relación de generalización (herencia)`;
+        return `relación de generalización (herencia)`;
     }
 
     actualizarClases() {

@@ -10,10 +10,10 @@ class Relacion {
 
     checkClases() {
         if (this.claseOrigen === Relacion.PENDIENTE) {
-            throw new Error(`No se pudo encontrar una clase para el origen de ${this.toString()}`);
+            throw new Error(`No se pudo encontrar una clase para el origen de una ${this.toString()}`);
         }
         if (this.claseDestino === Relacion.PENDIENTE) {
-            throw new Error(`No se pudo encontrar una clase para el destino de ${this.toString()}`);
+            throw new Error(`No se pudo encontrar una clase para el destino de una ${this.toString()}`);
         }
     }
 
