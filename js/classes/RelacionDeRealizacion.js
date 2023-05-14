@@ -6,4 +6,9 @@ class RelacionDeRealizacion extends RelacionDeGeneralizacion {
     toString() {
         return `Relación de realización (de interfaz)`;
     }
+
+    actualizarClases() {
+        this.checkClases();
+        console.log("actualizarClases de RelacionDeRealizacion");
+    }
 }

@@ -8,4 +8,9 @@ class RelacionDeAsociacion extends Relacion {
     toString() {
         return `Relación de asociación "${this.nombre || "(sin_nombre)"}" con cardinalidad: ${this.cardinalidad || "(cardinalidad)"}`;
     }
+
+    actualizarClases() {
+        this.checkClases();
+        console.log("actualizarClases de RelacionDeAsociacion");
+    }
 }

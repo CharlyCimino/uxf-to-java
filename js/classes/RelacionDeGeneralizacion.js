@@ -6,4 +6,9 @@ class RelacionDeGeneralizacion extends Relacion {
     toString() {
         return `Relación de generalización (herencia)`;
     }
+
+    actualizarClases() {
+        this.checkClases();
+        console.log("actualizarClases de RelacionDeGeneralizacion");
+    }
 }

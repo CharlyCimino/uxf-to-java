@@ -30,13 +30,7 @@ class Diagrama {
 
     actualizarClasesSegunRelaciones() {
         this.relaciones.forEach(rel => {
-            if (rel.claseOrigen === "pendiente") {
-                throw new Error(`No se pudo encontrar una clase para el origen de ${rel.toString()}`);
-            }
-            if (rel.claseDestino === "pendiente") {
-                throw new Error(`No se pudo encontrar una clase para el destino de ${rel.toString()}`);
-            }
-            
+            rel.actualizarClases();  
         })
     } 
 

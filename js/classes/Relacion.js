@@ -1,9 +1,20 @@
 class Relacion {
 
+    static PENDIENTE = "PEND";
+
     constructor(rectangulo) {
         this.rectangulo = rectangulo;
-        this.claseOrigen = "pendiente";
-        this.claseDestino = "pendiente";
+        this.claseOrigen = Relacion.PENDIENTE;
+        this.claseDestino = Relacion.PENDIENTE;
+    }
+
+    checkClases() {
+        if (this.claseOrigen === Relacion.PENDIENTE) {
+            throw new Error(`No se pudo encontrar una clase para el origen de ${this.toString()}`);
+        }
+        if (this.claseDestino === Relacion.PENDIENTE) {
+            throw new Error(`No se pudo encontrar una clase para el destino de ${this.toString()}`);
+        }
     }
 
     static parse(panelAttributes, additionalAttributes, coord, zoom) {
