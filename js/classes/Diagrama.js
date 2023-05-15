@@ -61,7 +61,8 @@ class Diagrama {
         return javaResult;
     }
 
-    static parse(nombre, zoomLevel, elements) {
+    static parse(nombre, zoomLevel, elements, tipoColeccion) {
+        RelacionDeAsociacion.setTipoColeccion(tipoColeccion);
         const datos = (elements.map(elem => { return { 
             id: elem.id[0]._text, 
             panelAttributes: elem.panel_attributes[0]?._text, 

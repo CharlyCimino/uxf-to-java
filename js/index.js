@@ -3,6 +3,7 @@ const form = document.getElementById("uxfToJavaForm");
 const btnCerrarAlerta = document.getElementById("cerrarAlerta");
 const divAlerta = document.getElementById('alerta');
 const msgAlerta = document.getElementById('mensajeAlerta');
+const inputNombrePaquete = document.getElementById('nombrePaquete');
 
 let diagram = undefined;
 let javaProject = undefined;
@@ -14,7 +15,7 @@ async function processUploadFile(evt) {
     try {
       const xmlString = reader.result;
       xmlAsJson = xmlToJSON.parseString(xmlString); 
-      diagram = xmlToClassDiagram(getFileName(), xmlAsJson);
+      diagram = xmlToClassDiagram(xmlAsJson);
       console.log(diagram.toJava());
     } catch(e) {
       mostrarError(e);
@@ -25,10 +26,18 @@ async function processUploadFile(evt) {
   reader.readAsText(getFile());
 }
 
-function xmlToClassDiagram(filename, xmlAsJson) {
+function xmlToClassDiagram(xmlAsJson) {
   const zoomLevel = xmlAsJson?.diagram[0]?.zoom_level[0]?._text;
   const elements = xmlAsJson?.diagram[0]?.element;
-  return Diagrama.parse(filename, parseInt(zoomLevel), elements);
+  const filename = getFileName();
+  const tipoColeccion = getRadioButtonCheckeado("tipoColeccion")?.value;
+  const nombrePaquete = inputNombrePaquete.value;
+  const tipoProyecto = getRadioButtonCheckeado("tipoProyecto")?.value;
+  return Diagrama.parse(filename, parseInt(zoomLevel), elements, tipoColeccion);
+}
+
+function getRadioButtonCheckeado(nombreGrupoRadioButtons) {
+  return Array.from(form.elements[nombreGrupoRadioButtons]).find(cb => cb.checked);
 }
 
 function getFile() {
@@ -36,6 +45,11 @@ function getFile() {
 }
 
 function getFileName() {
+  // "Archivo.uxf" --> "Archivo"
+  return getFile().name.split(".")[0];
+}
+
+function getTipoAtributoUnoAMuchos() {
   // "Archivo.uxf" --> "Archivo"
   return getFile().name.split(".")[0];
 }
