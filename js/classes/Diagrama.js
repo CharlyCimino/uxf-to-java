@@ -7,7 +7,6 @@ class Diagrama {
         this.clases = this.procesarClases(clasesSinProcesar);
         this.relaciones = this.procesarRelaciones(relacionesSinProcesar);
         this.transformarRelacionesACodigo();
-        console.log(this);
     }
 
     transformarRelacionesACodigo() {

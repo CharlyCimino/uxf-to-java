@@ -2,3 +2,7 @@
     padding: 1rem;
     background-color: #222;
 }
+
+#alerta {
+    display: none;
+}

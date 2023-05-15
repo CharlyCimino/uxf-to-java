@@ -1,26 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="css/monokai-sublime.min.css">
     <link rel="stylesheet" href="css/style.css">
     <title>Document</title>
 </head>
+
 <body>
-    <input type="file" name="" id="inputUxf" accept=".uxf" value="pruebaEnums.uxf" multiple>
-    <br>
-    <button onclick="upload()">Cargar archivo</button>
 
-    <div class="err">
-
+    <div class="container">
+        <h1>UXF to Java</h1>
     </div>
-
-    <div id="results">
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <form id="uxfToJavaForm">
+                    <div class="mb-3">
+                        <label>Cargá el diagrama de clases generado por el software <a href="https://www.umlet.com/"
+                                target="_blank">UMLet</a> o su versión online <a href="https://www.umletino.com/umletino.html"
+                                target="_blank">UMLetino</a>.</label>
+                        <input type="file" class="form-control" name="" id="inputUxf" accept=".uxf">
+                        <div id="emailHelp" class="form-text">* Debe tener extensión ".uxf"</div>
+                    </div>
+                    <div class="mb-3">
+                        <p>Los atributos para relaciones de cero a muchos serán de tipo...</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioAL" checked>
+                            <label class="form-check-label" for="inputRadioAL">
+                                ArrayList
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioLL">
+                            <label class="form-check-label" for="inputRadioLL">
+                                LinkedList
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioL">
+                            <label class="form-check-label" for="inputRadioL">
+                                List
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioCol">
+                            <label class="form-check-label" for="inputRadioCol">
+                                Collection
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="email" class="form-control" id="floatingInput" placeholder="ar.charlycimino.ejemplos">
+                        <label for="floatingInput">Nombre del paquete</label>
+                        <div id="passwordHelpBlock" class="form-text">
+                            Por ejemplo: <code>ar.charlycimino.ejemplos</code>. Dejar vacío si no se desea un paquete.
+                          </div>
+                    </div>
+                    <div class="mb-3">
+                        <p>Tipo de proyecto a generar</p>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipoProyecto" id="inputRadioNB" checked>
+                            <label class="form-check-label" for="inputRadioNB">
+                                NetBeans
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="tipoProyecto" id="inputRadioEC">
+                            <label class="form-check-label" for="inputRadioEC">
+                                Eclipse
+                            </label>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">Descargar código Java</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-4">
+                <div id="alerta" class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <button id="cerrarAlerta" type="button" class="btn-close"></button>
+                    <h4 class="alert-heading">¡No se pudo generar el proyecto Java!</h4>
+                    <p id="mensajeAlerta">Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
+                    <hr>
+                    <p class="mb-0">No dejes de leer la <a href="#">documentación</a> para tener éxito.</p>
+                </div>
+            </div>
+        </div>
         
     </div>
+
     
+
+    <div id="results">
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
     <script src="js/lib/highlight-js/highlight.min.js"></script>
     <script src="js/lib/highlight-js/java.min.js"></script>
     <script src="js/lib/highlight-js/xml.min.js"></script>
@@ -41,8 +123,6 @@
     <script src="js/classes/Clase.js"></script>
     <script src="js/classes/Diagrama.js"></script>
     <script src="js/index.js"></script>
-
-    <script></script>
-
 </body>
+
 </html>

@@ -1,67 +1,51 @@
-function loadFiles() {
-  const input = document.getElementById("inputUxf");
+const inputUxf = document.getElementById("inputUxf");
+const form = document.getElementById("uxfToJavaForm");
+const btnCerrarAlerta = document.getElementById("cerrarAlerta");
+const divAlerta = document.getElementById('alerta');
+const msgAlerta = document.getElementById('mensajeAlerta');
+
+let diagram = undefined;
+let javaProject = undefined;
+
+async function processUploadFile(evt) {
+  evt.preventDefault();
   const reader = new FileReader();
-  reader.onload = procesarArchivo;
-
-  for (const file of input.files) {
-    reader.readAsText(file);
-  }
-}
-
-const upload = async (event) => {
-  let files = Array.from(getFiles()).map(file => {
-    let reader = new FileReader();
-    return new Promise(async resolve => {
-      reader.onload = () => resolve(reader.result);
-      reader.readAsText(file);
-    });
-  });
-
-  let res = await Promise.all(files);
-  procesarArchivos(res);
-}
-
-function procesarArchivos(archivos) {
-  try {
-    const res = archivos.map(fileString => xmlToJSON.parseString(fileString));
-    const diagramas = res.map((xmlAsJson, i) => xmlToClassDiagram(getFileName(i), xmlAsJson));
-    const results = document.querySelector("#results");
-    diagramas.forEach(diagrama => {
-      const javaResult = diagrama.toJava();
-      if (javaResult) {
-        const preNode = document.createElement("pre");
-        const codeNode = document.createElement("code");
-        codeNode.classList.add('language-java');
-        codeNode.textContent = javaResult;
-        preNode.appendChild(codeNode);
-        results.innerHTML += `<h2>${diagrama.nombre}</h2>`;
-        results.appendChild(preNode);
-      }
-    });
-    hljs.highlightAll();
-  }
-  catch (e) {
-    document.querySelector(".err").innerHTML = (`<h3 style="color: crimson">${e}</h3>`);
-    console.error(e)
-  }
-
-}
-
-function getFiles() {
-  return document.getElementById("inputUxf").files;
-}
-
-function getFileName(i) {
-  // "Archivo.uxf" --> "Archivo"
-  return getFiles()[i].name.split(".")[0];
-  return "Test";
+  reader.onload = () => {
+    try {
+      const xmlString = reader.result;
+      xmlAsJson = xmlToJSON.parseString(xmlString); 
+      diagram = xmlToClassDiagram(getFileName(), xmlAsJson);
+      console.log(diagram.toJava());
+    } catch(e) {
+      mostrarError(e);
+      console.error(e);
+    }
+    
+  };
+  reader.readAsText(getFile());
 }
 
 function xmlToClassDiagram(filename, xmlAsJson) {
   const zoomLevel = xmlAsJson?.diagram[0]?.zoom_level[0]?._text;
   const elements = xmlAsJson?.diagram[0]?.element;
-  return Diagrama.parse(filename,parseInt(zoomLevel),elements);
+  return Diagrama.parse(filename, parseInt(zoomLevel), elements);
 }
 
+function getFile() {
+  return this.inputUxf.files[0];
+}
 
-//procesarArchivos([UML_TEST]);
+function getFileName() {
+  // "Archivo.uxf" --> "Archivo"
+  return getFile().name.split(".")[0];
+}
+
+function mostrarError(err) {  
+  msgAlerta.innerHTML = err;
+  divAlerta.style.display = "block";
+}
+
+form.addEventListener("submit", processUploadFile);
+btnCerrarAlerta.addEventListener("click", e => {
+  divAlerta.style.display = "none";
+})
