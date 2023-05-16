@@ -4,6 +4,8 @@ const btnCerrarAlerta = document.getElementById("cerrarAlerta");
 const divAlerta = document.getElementById('alerta');
 const msgAlerta = document.getElementById('mensajeAlerta');
 const inputNombrePaquete = document.getElementById('nombrePaquete');
+const btnDescarga = document.getElementById('btnDescarga');
+const msjInicialBtnDescargar = document.getElementById('msjInicialBtnDescargar');
 
 let diagram = undefined;
 let javaProject = undefined;
@@ -18,6 +20,7 @@ async function processUploadFile(evt) {
       diagram = xmlToClassDiagram(xmlAsJson);
       classDiagramToJavaProject(diagram);
       console.log(diagram.toJava());
+      activarBtnDescarga();
     } catch(e) {
       mostrarError(e);
       console.error(e);
@@ -25,6 +28,16 @@ async function processUploadFile(evt) {
     
   };
   reader.readAsText(getFile());
+}
+
+function activarBtnDescarga() {
+  btnDescarga.disabled = false;
+  msjInicialBtnDescargar.style.display = "none";
+}
+
+async function processDownloadProject(evt) {
+  evt.preventDefault();
+  console.warn("Pendiente")
 }
 
 function xmlToClassDiagram(xmlAsJson) {
@@ -64,7 +77,8 @@ function mostrarError(err) {
   divAlerta.style.display = "block";
 }
 
-form.addEventListener("submit", processUploadFile);
+inputUxf.addEventListener("change", processUploadFile);
+form.addEventListener("submit", processDownloadProject);
 btnCerrarAlerta.addEventListener("click", e => {
   divAlerta.style.display = "none";
 })

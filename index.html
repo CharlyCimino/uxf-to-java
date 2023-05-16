@@ -23,16 +23,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12 mt-3">
-                <form id="uxfToJavaForm">
+                <form id="uxfToJavaForm" class="border border-2 p-3">
                     <div class="mb-3">
-                        <label class="mb-1">Cargá el diagrama de clases generado por el software <a href="https://www.umlet.com/"
+                        <label class="mb-2" for="inputUxf">1) Cargá el diagrama de clases generado por el software <a href="https://www.umlet.com/"
                                 target="_blank">UMLet</a> o su versión online <a href="https://www.umletino.com/umletino.html"
                                 target="_blank">UMLetino</a>.</label>
                         <input type="file" class="form-control" name="" id="inputUxf" accept=".uxf">
-                        <div id="emailHelp" class="form-text">* Debe tener extensión ".uxf"</div>
+                        <div class="form-text">* Debe tener extensión ".uxf"</div>
                     </div>
                     <div class="mb-3">
-                        <p>Los atributos para relaciones de cero a muchos serán de tipo...</p>
+                        <p class="mb-2">2) Los atributos para relaciones de cero a muchos serán de tipo...</p>
                         <div class="form-check form-check-inline">
                             <input value="ArrayList" class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioAL" checked>
                             <label class="form-check-label" for="inputRadioAL">
@@ -58,15 +58,15 @@
                             </label>
                         </div>
                     </div>
-                    <div class="form-floating mb-3">
-                        <input type="text" class="form-control" id="nombrePaquete" placeholder="ar.charlycimino.ejemplos">
-                        <label for="floatingInput">Nombre del paquete</label>
+                    <div class="mb-3">
+                        <label for="nombrePaquete" class="mb-2">3) Nombre del paquete que agrupará todas las clases</label>
+                        <input type="text" class="form-control" id="nombrePaquete">
                         <div class="form-text">
-                            Por ejemplo: <code>ar.charlycimino.ejemplos</code>. Dejar vacío si no se desea un paquete.
+                            Por ejemplo: <code>ar.charlycimino.proyectos</code>. Dejar vacío si no se desea un paquete.
                           </div>
                     </div>
                     <div class="mb-3">
-                        <p>Tipo de proyecto a generar</p>
+                        <p class="mb-2">4) El proyecto generado será para importar en...</p>
                         <div class="form-check form-check-inline">
                             <input value="NetBeans" class="form-check-input" type="radio" name="tipoProyecto" id="inputRadioNB" checked>
                             <label class="form-check-label" for="inputRadioNB">
@@ -80,8 +80,9 @@
                             </label>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <button type="submit" class="btn btn-primary">Descargar código Java</button>
+                    <div class="justify-content-center flex-column d-flex">
+                        <button id="btnDescarga" type="submit" class="btn btn-danger" disabled>Descargar código Java</button>
+                        <div id="msjInicialBtnDescargar" class="form-text"><p class="m-0 text-center">Aún no cargaste un archivo .uxf</p></div>
                     </div>
                 </form>
             </div>
