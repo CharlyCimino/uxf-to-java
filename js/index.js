@@ -33,8 +33,7 @@ function processDownloadProject(evt) {
   try {
     diagram = xmlToClassDiagram(xmlAsJson);
     javaProject = classDiagramToJavaProject(diagram);
-    console.log(diagram.toJava());
-    console.log(javaProject);
+    javaProject.getZip();
     mostrarCartelColaborar(true);
   } catch(e) {
     mostrarCartelColaborar(false);
@@ -54,7 +53,7 @@ function xmlToClassDiagram(xmlAsJson) {
 function classDiagramToJavaProject(diagram) {
   const tipoProyecto = getRadioButtonCheckeado("tipoProyecto")?.value;
   const nombrePaquete = inputNombrePaquete.value;
-  return new ProyectoJava(getFileName(), nombrePaquete, tipoProyecto, diagram.toJava());
+  return ProyectoJavaFactory.crearProyecto(tipoProyecto, getFileName(), nombrePaquete, diagram.clases);
 }
 
 function getRadioButtonCheckeado(nombreGrupoRadioButtons) {

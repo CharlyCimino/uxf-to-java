@@ -1,9 +1,11 @@
 class ProyectoJava {
-    constructor(filename = "", nombrePaquete = "", tipoProyecto, codigoJava = "") {
+    constructor(filename = "Proyecto sin nombre", nombrePaquete = "", clasesJava = []) {
         this.filename = filename;
         this.nombrePaquete = nombrePaquete;
-        this.tipoProyecto = tipoProyecto;
-        this.codigoJava = codigoJava;
-        console.log(this);
+        this.clasesJava = clasesJava;
+    }
+
+    getZip() {
+        console.warn("getZip de ProyectoJava pendiente...")
     }
 }
