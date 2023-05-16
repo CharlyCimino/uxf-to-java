@@ -20,8 +20,18 @@ class RelacionDeAsociacion extends Relacion {
         let tipo = this.claseDestino.nombre;
         if (this.cardinalidad.includes("*") || this.cardinalidad.includes("n")) {
             tipo = `${RelacionDeAsociacion.TIPO_COLECCION}<${tipo}>`;
+        } else if (!this.cardinalidad.includes("0") && !this.cardinalidad.includes("1")) {
+            const cantCorchetes = this.cuantosCorchetes(this.cardinalidad);
+            tipo = `${tipo}[]`;
+            for (let i = 1; i < cantCorchetes; i++) {
+                tipo += `[]`;
+            }
         }
         return Atributo.parse(`${this.nombre}: ${tipo}`);
+    }
+
+    cuantosCorchetes(cad) {
+        return cad.split("[").length-1;
     }
 
     static setTipoColeccion(tipoColeccion) {

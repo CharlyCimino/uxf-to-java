@@ -54,7 +54,7 @@ class Relacion {
 
     static getCardinalidadRegex() {
         return createRegex([
-            /^(?:m1=\s*)?((?:[1*n])|(?:[0-1]\.\.[1*n])|(?:\d+))\s*$/
+            /^(?:m1=\s*)?((?:[1*n])|(?:[0-1]\.\.[1*n])|(?:\d+)|(?:[a-zA-Z0-9_\[\]]*))\s*$/
         ]);
     }
 

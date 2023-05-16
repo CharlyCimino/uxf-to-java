@@ -16,6 +16,7 @@ async function processUploadFile(evt) {
       const xmlString = reader.result;
       xmlAsJson = xmlToJSON.parseString(xmlString); 
       diagram = xmlToClassDiagram(xmlAsJson);
+      classDiagramToJavaProject(diagram);
       console.log(diagram.toJava());
     } catch(e) {
       mostrarError(e);
@@ -31,9 +32,13 @@ function xmlToClassDiagram(xmlAsJson) {
   const elements = xmlAsJson?.diagram[0]?.element;
   const filename = getFileName();
   const tipoColeccion = getRadioButtonCheckeado("tipoColeccion")?.value;
-  const nombrePaquete = inputNombrePaquete.value;
-  const tipoProyecto = getRadioButtonCheckeado("tipoProyecto")?.value;
   return Diagrama.parse(filename, parseInt(zoomLevel), elements, tipoColeccion);
+}
+
+function classDiagramToJavaProject(diagram) {
+  const tipoProyecto = getRadioButtonCheckeado("tipoProyecto")?.value;
+  const nombrePaquete = inputNombrePaquete.value;
+  new ProyectoJava(getFileName(), nombrePaquete, tipoProyecto, diagram.toJava());
 }
 
 function getRadioButtonCheckeado(nombreGrupoRadioButtons) {
