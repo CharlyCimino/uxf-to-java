@@ -1,111 +1,136 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es" data-bs-theme="dark">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+  </head>
     <link rel="stylesheet" href="css/monokai-sublime.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <title>Document</title>
+    <title>UXF to Java</title>
 </head>
 
 <body>
 
     <div class="container">
-        <img src="img/uxf-to-java-logo.png" alt="uxf-to-java-logo" class="img-fluid mx-auto d-block w-25">
-        <h2 class="h4 text-center">Herramienta online para generar código Java a partir de un diagrama de clases generado con <a href="https://www.umlet.com/"
-            target="_blank">UMLet</a> o <a href="https://www.umletino.com/umletino.html"
-            target="_blank">UMLetino</a></h2>
+        <img src="img/uxf-to-java-logo.gif" alt="uxf-to-java-logo" class="img-fluid mx-auto d-block w-25">
+        <h2 class="lead text-center">Herramienta online para generar código Java a partir de un diagrama de clases
+            generado con <a href="https://www.umlet.com/" target="_blank">UMLet</a> o <a
+                href="https://www.umletino.com/umletino.html" target="_blank">UMLetino</a></h2>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-12 mt-3">
                 <form id="uxfToJavaForm" class="border border-2 p-3">
                     <div class="mb-3">
-                        <label class="mb-2" for="inputUxf">1) Cargá el diagrama de clases generado por el software <a href="https://www.umlet.com/"
-                                target="_blank">UMLet</a> o su versión online <a href="https://www.umletino.com/umletino.html"
-                                target="_blank">UMLetino</a>.</label>
+                        <label class="mb-2" for="inputUxf"><strong>
+                            1) Cargá el diagrama de clases generado por el software <a
+                                    href="https://www.umlet.com/" target="_blank">UMLet</a> o su versión online <a
+                                    href="https://www.umletino.com/umletino.html" target="_blank">UMLetino</a>.
+                        </strong></label>
                         <input type="file" class="form-control" name="" id="inputUxf" accept=".uxf">
                         <div class="form-text">* Debe tener extensión ".uxf"</div>
                     </div>
                     <div class="mb-3">
-                        <p class="mb-2">2) Los atributos para relaciones de cero a muchos serán de tipo...</p>
+                        <p class="mb-2"><strong>2) Los atributos para relaciones de cero a muchos serán de tipo...</strong></p>
                         <div class="form-check form-check-inline">
-                            <input value="ArrayList" class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioAL" checked>
+                            <input value="ArrayList" class="form-check-input" type="radio" name="tipoColeccion"
+                                id="inputRadioAL" checked>
                             <label class="form-check-label" for="inputRadioAL">
                                 ArrayList
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input value="LinkedList" class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioLL">
+                            <input value="LinkedList" class="form-check-input" type="radio" name="tipoColeccion"
+                                id="inputRadioLL">
                             <label class="form-check-label" for="inputRadioLL">
                                 LinkedList
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input value="List" class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioL">
+                            <input value="List" class="form-check-input" type="radio" name="tipoColeccion"
+                                id="inputRadioL">
                             <label class="form-check-label" for="inputRadioL">
                                 List
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input value="Collection" class="form-check-input" type="radio" name="tipoColeccion" id="inputRadioCol">
+                            <input value="Collection" class="form-check-input" type="radio" name="tipoColeccion"
+                                id="inputRadioCol">
                             <label class="form-check-label" for="inputRadioCol">
                                 Collection
                             </label>
                         </div>
                     </div>
                     <div class="mb-3">
-                        <label for="nombrePaquete" class="mb-2">3) Nombre del paquete que agrupará todas las clases</label>
+                        <label for="nombrePaquete" class="mb-2"><strong>
+                            3) Nombre del paquete que agrupará todas las
+                                clases
+                        </strong></label>
                         <input type="text" class="form-control" id="nombrePaquete">
                         <div class="form-text">
                             Por ejemplo: <code>ar.charlycimino.proyectos</code>. Dejar vacío si no se desea un paquete.
-                          </div>
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <p class="mb-2">4) El proyecto generado será para importar en...</p>
+                        <p class="mb-2"><strong>4) El proyecto generado será para importar en...</strong></p>
                         <div class="form-check form-check-inline">
-                            <input value="NetBeans" class="form-check-input" type="radio" name="tipoProyecto" id="inputRadioNB" checked>
+                            <input value="NetBeans" class="form-check-input" type="radio" name="tipoProyecto"
+                                id="inputRadioNB" checked>
                             <label class="form-check-label" for="inputRadioNB">
                                 NetBeans
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input value="Eclipse" class="form-check-input" type="radio" name="tipoProyecto" id="inputRadioEC">
+                            <input value="Eclipse" class="form-check-input" type="radio" name="tipoProyecto"
+                                id="inputRadioEC">
                             <label class="form-check-label" for="inputRadioEC">
                                 Eclipse
                             </label>
                         </div>
                     </div>
                     <div class="justify-content-center flex-column d-flex">
-                        <button id="btnDescarga" type="submit" class="btn btn-danger" disabled>Descargar código Java</button>
-                        <div id="msjInicialBtnDescargar" class="form-text"><p class="m-0 text-center">Aún no cargaste un archivo .uxf</p></div>
+                        <button id="btnDescarga" type="submit" class="btn btn-danger" disabled>Descargar código
+                            Java</button>
+                        <div id="msjInicialBtnDescargar" class="form-text">
+                            <p class="m-0 text-center">Aún no cargaste un archivo .uxf</p>
+                        </div>
                     </div>
                 </form>
             </div>
-            <div class="col-4">
-                <div id="alerta" class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <button id="cerrarAlerta" type="button" class="btn-close"></button>
-                    <h4 class="alert-heading">¡No se pudo generar el proyecto Java!</h4>
-                    <p id="mensajeAlerta">Aww yeah, you successfully read this important alert message. This example text is going to run a bit longer so that you can see how spacing within an alert works with this kind of content.</p>
-                    <hr>
-                    <p class="mb-0">No dejes de leer la <a href="#">documentación</a> para tener éxito.</p>
+
+            <!-- Modal Error -->
+            <div class="modal fade" id="modalError" tabindex="-1" aria-labelledby="modalErrorLabel"
+                aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalErrorLabel">Error al interpretar diagrama UML</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p id="mensajeAlerta" class="text-danger"></p>
+                            <p class="mb-0">Revisá la <a href="#">documentación</a> para no tener problemas.</p>
+                        </div>
+                        <div class="modal-footer">                            
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        
+
     </div>
 
-    
+
 
     <div id="results">
 
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
 
     <script src="js/lib/highlight-js/highlight.min.js"></script>
     <script src="js/lib/highlight-js/java.min.js"></script>

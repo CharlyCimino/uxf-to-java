@@ -22,11 +22,11 @@ class Relacion {
         let [tipoFlecha, cardinalidad = "1", nombreRelacion = ""] = panelAttributes;
 
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
-        if (!match) throw new Error(`No se pudo parsear la relación dada por el tipo de flecha: '${tipoFlecha}'\n${REVISAR_SINTAXIS_LETINO}`);
+        if (!match) throw new Error(`No se pudo parsear la relación dada por el tipo de flecha: '${tipoFlecha}'`);
         tipoFlecha = match[1]; // Sin el 'lt='
 
         match = Relacion.getCardinalidadRegex().exec(cardinalidad);
-        if (!match) throw new Error(`No se pudo parsear la cardinalidad '${cardinalidad}' de la relación dada por el tipo de flecha '${tipoFlecha}'\n${REVISAR_SINTAXIS_LETINO}`);
+        if (!match) throw new Error(`No se pudo parsear la cardinalidad '${cardinalidad}' de la relación dada por el tipo de flecha '${tipoFlecha}'`);
         cardinalidad = match[1]; // Sin el 'm1='
 
         const rect = new Rectangulo(coord);

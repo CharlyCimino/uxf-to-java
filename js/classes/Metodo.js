@@ -56,7 +56,7 @@ class Metodo {
         ({ esAbstract, valor: cad } = resolverAbstract(cad));
 
         let match = Metodo.getRegex().exec(cad);
-        if (!match) throw new Error(`No se pudo parsear método '${cad}' de la clase ${nombreClase}\n${REVISAR_SINTAXIS}`);
+        if (!match) throw new Error(`No se pudo parsear método '${cad}' de la clase ${nombreClase}`);
 
         let [, visibilidad, nombre, listaDeParametros , retorno] = match;
 
