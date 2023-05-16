@@ -6,9 +6,16 @@ class ProyectoJava {
     }
 
     getZip() {
+        this.colocarPackageEnClases();
         const zip = new JSZip();
         this.generarCarpetaSrc(zip);
         return zip;
+    }
+
+    colocarPackageEnClases() {
+        this.clasesJava.forEach(cl => {
+            cl.addPackage(this.nombrePaquete);
+        })
     }
 
     generarCarpetaSrc(zip) {
@@ -16,8 +23,8 @@ class ProyectoJava {
         if (this.nombrePaquete) {
             pathSrc += "/" + this.nombrePaquete.replaceAll(".", "/");
         }
-        console.log(pathSrc);
         this.clasesJava.forEach(cl => {
+            console.log(cl.toJava())
             zip.file(`${pathSrc}/${cl.nombre}.java`, cl.toJava());
         })
     }

@@ -62,7 +62,7 @@ function xmlToClassDiagram(xmlAsJson) {
 
 function classDiagramToJavaProject(diagram) {
   const tipoProyecto = getRadioButtonCheckeado("tipoProyecto")?.value;
-  const nombrePaquete = inputNombrePaquete.value;
+  const nombrePaquete = inputNombrePaquete.value.trim();
   return ProyectoJavaFactory.crearProyecto(tipoProyecto, getFileName(), nombrePaquete, diagram.clases);
 }
 

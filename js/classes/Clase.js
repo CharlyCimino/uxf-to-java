@@ -5,6 +5,7 @@ class Clase {
         this.atributos = atributos;
         this.metodos = metodos;
         this.rectangulo = rectangulo;
+        this.package = undefined;
         this.superclase = undefined;
         this.interfaces = [];
         this.atributos = this.atributos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
@@ -26,12 +27,21 @@ class Clase {
         this.interfaces.push(interf);
     }
 
+    addPackage(p) {
+        if (p != "" && !p.match(/^[a-z0-9]+(\.[a-z0-9]*)*$/)) {
+            throw new Error(`'${p}' no es un nombre de paquete válido`);
+        }
+        this.package = p;
+    }
+
     esConectadaPor(puntoDeRelacion) {
         return this.rectangulo.esConectadoPor(puntoDeRelacion);
     }
 
     toJava() {
-        let javaCode = `public ${this.tipo} ${this.nombre}`;
+        let javaCode = "";
+        javaCode = this.escribirPaquete(javaCode);
+        javaCode += `public ${this.tipo} ${this.nombre}`;
         javaCode = this.escribirSuperclase(javaCode);
         javaCode = this.escribirInterfaces(javaCode);
         javaCode += " {\n\n\t";
@@ -40,6 +50,13 @@ class Clase {
         javaCode += "\n";
         javaCode = this.escribirMetodos(javaCode);
         javaCode += "}";
+        return javaCode;
+    }
+
+    escribirPaquete(javaCode) {
+        if (this.package) {
+            javaCode += `package ${this.package};\n\n`;
+        }
         return javaCode;
     }
 
