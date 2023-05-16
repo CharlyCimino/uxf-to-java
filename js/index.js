@@ -6,6 +6,7 @@ const btnDescarga = document.getElementById('btnDescarga');
 const msjInicialBtnDescargar = document.getElementById('msjInicialBtnDescargar');
 const modalError = new bootstrap.Modal(document.getElementById('modalError'))
 
+let xmlAsJson = undefined;
 let diagram = undefined;
 let javaProject = undefined;
 
@@ -16,28 +17,27 @@ async function processUploadFile(evt) {
     try {
       const xmlString = reader.result;
       xmlAsJson = xmlToJSON.parseString(xmlString); 
-      diagram = xmlToClassDiagram(xmlAsJson);
-      classDiagramToJavaProject(diagram);
-      console.log(diagram.toJava());
       activarBtnDescarga(true);
     } catch(e) {
       mostrarError(e);
       console.error(e);
       activarBtnDescarga(false);
-    }
-    
+    }    
   };
   reader.readAsText(getFile());
 }
 
-function activarBtnDescarga(flag) {
-  btnDescarga.disabled = !flag;
-  msjInicialBtnDescargar.style.display = flag ? "none" : "block";
-}
-
-async function processDownloadProject(evt) {
+function processDownloadProject(evt) {
   evt.preventDefault();
-  console.warn("Pendiente")
+  try {
+    diagram = xmlToClassDiagram(xmlAsJson);
+    javaProject = classDiagramToJavaProject(diagram);
+    console.log(diagram.toJava());
+    console.log(javaProject);
+  } catch(e) {
+    mostrarError(e);
+    console.error(e);
+  }
 }
 
 function xmlToClassDiagram(xmlAsJson) {
@@ -51,11 +51,16 @@ function xmlToClassDiagram(xmlAsJson) {
 function classDiagramToJavaProject(diagram) {
   const tipoProyecto = getRadioButtonCheckeado("tipoProyecto")?.value;
   const nombrePaquete = inputNombrePaquete.value;
-  new ProyectoJava(getFileName(), nombrePaquete, tipoProyecto, diagram.toJava());
+  return new ProyectoJava(getFileName(), nombrePaquete, tipoProyecto, diagram.toJava());
 }
 
 function getRadioButtonCheckeado(nombreGrupoRadioButtons) {
   return Array.from(form.elements[nombreGrupoRadioButtons]).find(cb => cb.checked);
+}
+
+function activarBtnDescarga(flag) {
+  btnDescarga.disabled = !flag;
+  msjInicialBtnDescargar.style.display = flag ? "none" : "block";
 }
 
 function getFile() {
@@ -63,11 +68,6 @@ function getFile() {
 }
 
 function getFileName() {
-  // "Archivo.uxf" --> "Archivo"
-  return getFile().name.split(".")[0];
-}
-
-function getTipoAtributoUnoAMuchos() {
   // "Archivo.uxf" --> "Archivo"
   return getFile().name.split(".")[0];
 }
