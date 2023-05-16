@@ -45,8 +45,8 @@ async function processDownloadProject(evt) {
 
 async function descargar(zip) {
     const result = await zip.generateAsync({type: "blob"});
-    a = document.createElement("a");
-    url = window.URL.createObjectURL(result);
+    const a = document.createElement("a");
+    const url = window.URL.createObjectURL(result);
     a.href = url;
     a.download = javaProject.filename;
     a.click();
