@@ -4,7 +4,8 @@ const msgAlerta = document.getElementById('mensajeAlerta');
 const inputNombrePaquete = document.getElementById('nombrePaquete');
 const btnDescarga = document.getElementById('btnDescarga');
 const msjInicialBtnDescargar = document.getElementById('msjInicialBtnDescargar');
-const modalError = new bootstrap.Modal(document.getElementById('modalError'))
+const colaborar = document.getElementById('colaborar');
+const modalError = new bootstrap.Modal(document.getElementById('modalError'));
 
 let xmlAsJson = undefined;
 let diagram = undefined;
@@ -34,7 +35,9 @@ function processDownloadProject(evt) {
     javaProject = classDiagramToJavaProject(diagram);
     console.log(diagram.toJava());
     console.log(javaProject);
+    mostrarCartelColaborar(true);
   } catch(e) {
+    mostrarCartelColaborar(false);
     mostrarError(e);
     console.error(e);
   }
@@ -75,6 +78,10 @@ function getFileName() {
 function mostrarError(err) {
   msgAlerta.innerHTML = err;
   modalError.show();  
+}
+
+function mostrarCartelColaborar(flag) {
+  colaborar.style.display = !flag ? "none" : "block";
 }
 
 inputUxf.addEventListener("change", processUploadFile);
