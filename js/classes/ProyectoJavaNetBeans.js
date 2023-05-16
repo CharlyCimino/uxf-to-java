@@ -4,7 +4,7 @@ class ProyectoJavaNetBeans extends ProyectoJava {
     }
 
     getZip() {
-        super.getZip();
+        return super.getZip();
         console.warn("getZip de NetBeans pendiente...")
     }
 }

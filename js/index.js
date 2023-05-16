@@ -28,18 +28,28 @@ async function processUploadFile(evt) {
   reader.readAsText(getFile());
 }
 
-function processDownloadProject(evt) {
+async function processDownloadProject(evt) {
   evt.preventDefault();
   try {
     diagram = xmlToClassDiagram(xmlAsJson);
     javaProject = classDiagramToJavaProject(diagram);
-    javaProject.getZip();
+    const zip = javaProject.getZip();
+    await descargar(zip);
     mostrarCartelColaborar(true);
   } catch(e) {
     mostrarCartelColaborar(false);
     mostrarError(e);
     console.error(e);
   }
+}
+
+async function descargar(zip) {
+    const result = await zip.generateAsync({type: "blob"});
+    a = document.createElement("a");
+    url = window.URL.createObjectURL(result);
+    a.href = url;
+    a.download = javaProject.filename;
+    a.click();
 }
 
 function xmlToClassDiagram(xmlAsJson) {

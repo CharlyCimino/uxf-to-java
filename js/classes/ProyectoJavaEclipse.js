@@ -4,7 +4,7 @@ class ProyectoJavaEclipse extends ProyectoJava {
     }
 
     getZip() {
-        super.getZip();
+        return super.getZip();
         console.warn("getZip de Eclipse pendiente...")
     }
 }

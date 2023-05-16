@@ -6,6 +6,10 @@ class ProyectoJava {
     }
 
     getZip() {
-        console.warn("getZip de ProyectoJava pendiente...")
+        const zip = new JSZip();
+        this.clasesJava.forEach(cl => {
+            zip.file(`${cl.nombre}.java`, cl.toJava());
+        })
+        return zip;
     }
 }
