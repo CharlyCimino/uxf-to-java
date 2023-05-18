@@ -69,7 +69,7 @@
                     <div class="mb-3">
                         <label for="nombrePaquete" class="mb-2"><strong>
                                 3) Nombre del paquete que agrupará todas las
-                                clases
+                                clases...
                             </strong></label>
                         <input type="text" class="form-control" id="nombrePaquete" value="ar.charlycimino.proyectos">
                         <div class="form-text">
@@ -77,7 +77,23 @@
                         </div>
                     </div>
                     <div class="mb-3">
-                        <p class="mb-2"><strong>4) El proyecto generado será para importar en...</strong></p>
+                        <p class="mb-2"><strong>4) Versión del JDK (Java Development Kit)...</strong></p>
+                        <div class="row">
+                            <div class="col-4 col-sm-3 col-md-2 col-xl-1">
+                                <select class="form-select" id="selectVersionJDK">
+                                    <option value="1.8">8</option>
+                                    <option value="11">11</option>
+                                    <option selected value="17">17</option>
+                                </select>
+                            </div>
+                            <div class="col-12 form-text">Las versiones de la lista son las recomendadas, por ser LTS (Long Time
+                                Support)</div>
+                        </div>
+                        
+
+                    </div>
+                    <div class="mb-3">
+                        <p class="mb-2"><strong>5) El proyecto generado será para importar en...</strong></p>
                         <div class="form-check form-check-inline">
                             <input value="NetBeans" class="form-check-input" type="radio" name="tipoProyecto"
                                 id="inputRadioNB" checked>
@@ -126,11 +142,14 @@
     <div id="colaborar" class="container">
         <div class="alert mt-3" role="alert">
             <p>La descarga ha comenzado... Si te fue útil este recurso, invitame un cafecito ☕😁</p>
-              <p class="m-0"><a href="https://cafecito.app/charlycimino" target="_blank" class="btn btn-info">Invitar desde Argentina</a>
-             <a href="https://paypal.me/charlycimino" target="_blank" class="btn btn-success">Invitar fuera de Argentina</a></p>             
+            <p class="m-0"><a href="https://cafecito.app/charlycimino" target="_blank" class="btn btn-info">Invitar
+                    desde Argentina</a>
+                <a href="https://paypal.me/charlycimino" target="_blank" class="btn btn-success">Invitar fuera de
+                    Argentina</a>
+            </p>
         </div>
     </div>
-   
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"

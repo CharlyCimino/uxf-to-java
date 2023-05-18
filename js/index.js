@@ -2,6 +2,7 @@ const inputUxf = document.getElementById("inputUxf");
 const form = document.getElementById("uxfToJavaForm");
 const msgAlerta = document.getElementById('mensajeAlerta');
 const inputNombrePaquete = document.getElementById('nombrePaquete');
+const selectVersionJDK = document.getElementById('selectVersionJDK');
 const btnDescarga = document.getElementById('btnDescarga');
 const msjInicialBtnDescargar = document.getElementById('msjInicialBtnDescargar');
 const colaborar = document.getElementById('colaborar');
@@ -63,7 +64,8 @@ function xmlToClassDiagram(xmlAsJson) {
 function classDiagramToJavaProject(diagram) {
   const tipoProyecto = getRadioButtonCheckeado("tipoProyecto")?.value;
   const nombrePaquete = inputNombrePaquete.value.trim();
-  return ProyectoJavaFactory.crearProyecto(tipoProyecto, getFileName(), nombrePaquete, diagram.clases);
+  const jdk = selectVersionJDK.value;
+  return ProyectoJavaFactory.crearProyecto(tipoProyecto, getFileName(), nombrePaquete, jdk, diagram.clases);
 }
 
 function getRadioButtonCheckeado(nombreGrupoRadioButtons) {

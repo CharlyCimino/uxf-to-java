@@ -1,6 +1,6 @@
 class ProyectoJavaEclipse extends ProyectoJava {
-    constructor(filename, nombrePaquete, clasesJava) {
-        super(filename, nombrePaquete, clasesJava);
+    constructor(filename, nombrePaquete, jdk, clasesJava) {
+        super(filename, nombrePaquete, jdk, clasesJava);
     }
 
     getZip() {

@@ -1,8 +1,9 @@
 class ProyectoJava {
-    constructor(filename = "Proyecto sin nombre", nombrePaquete = "", clasesJava = []) {
+    constructor(filename = "Proyecto sin nombre", nombrePaquete = "", jdk = "1.8", clasesJava = []) {
         this.filename = filename.trim().replaceAll(" ", "-");
         this.nombrePaquete = nombrePaquete;
         this.clasesJava = clasesJava;
+        this.jdk = jdk;
         this.generarMain();
     }
 

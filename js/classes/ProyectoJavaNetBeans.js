@@ -1,6 +1,6 @@
 class ProyectoJavaNetBeans extends ProyectoJava {
-    constructor(filename, nombrePaquete, clasesJava) {
-        super(filename, nombrePaquete, clasesJava);
+    constructor(filename, nombrePaquete, jdk, clasesJava) {
+        super(filename, nombrePaquete, jdk, clasesJava);
     }
 
     getZip() {
@@ -58,8 +58,8 @@ javac.modulepath=
 javac.processormodulepath=
 javac.processorpath=\
     \${javac.classpath}
-javac.source=17
-javac.target=17
+javac.source=${this.jdk}
+javac.target=${this.jdk}
 javac.test.classpath=\
     \${javac.classpath}:\
     \${build.classes.dir}
