@@ -1,6 +1,6 @@
 class ProyectoJava {
     constructor(filename = "Proyecto sin nombre", nombrePaquete = "", clasesJava = []) {
-        this.filename = filename;
+        this.filename = filename.trim().replaceAll(" ", "-");
         this.nombrePaquete = nombrePaquete;
         this.clasesJava = clasesJava;
     }
@@ -8,7 +8,8 @@ class ProyectoJava {
     getZip() {
         this.colocarPackageEnClases();
         const zip = new JSZip();
-        this.generarCarpetaSrc(zip);
+        const folderProjectZip = zip.folder(this.filename);
+        this.generarCarpetaSrc(folderProjectZip);
         return zip;
     }
 
@@ -24,7 +25,6 @@ class ProyectoJava {
             pathSrc += "/" + this.nombrePaquete.replaceAll(".", "/");
         }
         this.clasesJava.forEach(cl => {
-            console.log(cl.toJava())
             zip.file(`${pathSrc}/${cl.nombre}.java`, cl.toJava());
         })
     }
