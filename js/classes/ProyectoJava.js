@@ -3,10 +3,20 @@ class ProyectoJava {
         this.filename = filename.trim().replaceAll(" ", "-");
         this.nombrePaquete = nombrePaquete;
         this.clasesJava = clasesJava;
+        this.generarMain();
+    }
+
+    generarMain() {
+        const nombreClaseMain = "Test";
+        const mainUML = "_+main(args: String[]): void_";
+        const metodoMain = Metodo.parse(mainUML, nombreClaseMain);
+        const mainClass = new Clase("class", nombreClaseMain, [], [metodoMain]);
+        this.clasesJava.push(mainClass);
     }
 
     getZip() {
         this.colocarPackageEnClases();
+        this.clasesJava.forEach(cl => console.log(cl.toJava()));
         const zip = new JSZip();
         const folderProjectZip = zip.folder(this.filename);
         this.generarCarpetaSrc(folderProjectZip);

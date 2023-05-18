@@ -25,7 +25,51 @@ class Metodo {
         if (this.esAbstract) {
             javaCode += ";"; // Los métodos abstractos no llevan implementación
         } else {
-            javaCode += " {\n\t\t// A resolver...\n\t}";
+            javaCode += " {\n\t\t// Método a resolver...\n";
+            javaCode = this.escribirRetornoEnImplementacion(javaCode);
+            javaCode += "\t}";
+        }
+        return javaCode;
+    }
+
+    escribirRetornoEnImplementacion(javaCode) {
+        if (this.retorno !== "void") {
+            javaCode += "\t\treturn ";
+            switch(this.retorno) {
+                case "byte":
+                case "Byte":
+                case "short":
+                case "Short":
+                case "int":
+                case "Integer":
+                case "long":
+                case "float":
+                case "double":
+                case "char":
+                case "Character":
+                    javaCode += "0";
+                    break;
+                case "Long":
+                    javaCode += "0l";
+                    break;
+                case "Float":
+                    javaCode += "0f";
+                    break;
+                case "Double":
+                    javaCode += "0d";
+                    break;
+                case "boolean":
+                case "Boolean":
+                    javaCode += "false";
+                    break;
+                case "String":
+                    javaCode += "\"\"";
+                    break;
+                default:
+                    javaCode += "null";
+                    break;
+            }
+            javaCode += ";\n";
         }
         return javaCode;
     }
