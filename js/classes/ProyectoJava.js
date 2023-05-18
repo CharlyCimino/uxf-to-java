@@ -14,13 +14,21 @@ class ProyectoJava {
         this.clasesJava.push(mainClass);
     }
 
-    getZip() {
+    getZip() {        
+        this.corregirFechaJSZip(); // Para evitar error de fecha de modificación en los archivos generados
+
         this.colocarPackageEnClases();
         this.clasesJava.forEach(cl => console.log(cl.toJava()));
         const zip = new JSZip();
         const folderProjectZip = zip.folder(this.filename);
         this.generarCarpetaSrc(folderProjectZip);
         return zip;
+    }
+
+    corregirFechaJSZip() {
+        const currDate = new Date();
+        const dateWithOffset = new Date(currDate.getTime() - currDate.getTimezoneOffset() * 60000);
+        JSZip.defaults.date = dateWithOffset;
     }
 
     colocarPackageEnClases() {
