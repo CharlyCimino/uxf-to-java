@@ -5,37 +5,39 @@
 # Documentación 📖
 
 ## Índice
-- [Cómo representar clases UML](#cómo-representar-clases-uml)
-  - [Nombre de la clase UML](#nombre-de-la-clase-uml)
-  - [Atributos de la clase UML](#atributos-de-la-clase-uml)
-    - [Estructura de un atributo UML](#estructura-de-un-atributo-uml)
-  - [Métodos de la clase UML](#métodos-de-la-clase-uml)
-    - [Estructura de un método UML](#estructura-de-un-método-uml)
-    - [Método estático](#método-estático)
-    - [Método abstracto](#método-abstracto)
-    - [Método constructor](#método-constructor)
-- [Enumeraciones](#enumeraciones)
-  - [Valores de las clases enumeradas](#valores-de-las-clases-enumeradas)
-  - [Enumeraciones con atributos y métodos](#enumeraciones-con-atributos-y-métodos)
-- [Interfaces](#interfaces)
-- [Cómo representar relaciones UML](#cómo-representar-relaciones-uml)
-    - [Tipos de asociación](#tipos-de-asociación)
-    - [Cardinalidad de la relación](#cardinalidad-de-la-relación)
-    - [Atributo asociado a la relación](#atributo-asociado-a-la-relación)
-  - [Relación de asociación](#relación-de-asociación)
-    - [Tipos de asociación](#tipos-de-asociación-1)
-    - [Cardinalidad de la relación](#cardinalidad-de-la-relación-1)
-      - [Un solo elemento](#un-solo-elemento)
-      - [De cero/uno a muchos elementos](#de-cerouno-a-muchos-elementos)
-      - [Número definido de elementos](#número-definido-de-elementos)
-      - [Arrays de más de una dimensión](#arrays-de-más-de-una-dimensión)
-    - [Nombre de la relación](#nombre-de-la-relación)
-  - [Relación de generalización (herencia)](#relación-de-generalización-herencia)
-  - [Relación de realización (interfaz)](#relación-de-realización-interfaz)
-- [Elementos omitidos](#elementos-omitidos)
-- [Particularidades del generador de código Java](#particularidades-del-generador-de-código-java)
-- [Errores posibles](#errores-posibles)
-- [Agregados a futuro](#agregados-a-futuro)
+- [Documentación 📖](#documentación-)
+  - [Índice](#índice)
+  - [Cómo representar clases UML](#cómo-representar-clases-uml)
+    - [Nombre de la clase UML](#nombre-de-la-clase-uml)
+    - [Atributos de la clase UML](#atributos-de-la-clase-uml)
+      - [Estructura de un atributo UML](#estructura-de-un-atributo-uml)
+    - [Métodos de la clase UML](#métodos-de-la-clase-uml)
+      - [Estructura de un método UML](#estructura-de-un-método-uml)
+      - [Método estático](#método-estático)
+      - [Método abstracto](#método-abstracto)
+      - [Método constructor](#método-constructor)
+  - [Enumeraciones](#enumeraciones)
+    - [Valores de las clases enumeradas](#valores-de-las-clases-enumeradas)
+    - [Enumeraciones con atributos y métodos](#enumeraciones-con-atributos-y-métodos)
+  - [Interfaces](#interfaces)
+  - [Cómo representar relaciones UML](#cómo-representar-relaciones-uml)
+      - [Tipos de asociación](#tipos-de-asociación)
+      - [Cardinalidad de la relación](#cardinalidad-de-la-relación)
+      - [Atributo asociado a la relación](#atributo-asociado-a-la-relación)
+    - [Relación de asociación](#relación-de-asociación)
+      - [Tipos de asociación](#tipos-de-asociación-1)
+      - [Cardinalidad de la relación](#cardinalidad-de-la-relación-1)
+        - [Un solo elemento](#un-solo-elemento)
+        - [De cero/uno a muchos elementos](#de-cerouno-a-muchos-elementos)
+        - [Número definido de elementos](#número-definido-de-elementos)
+        - [Arrays de más de una dimensión](#arrays-de-más-de-una-dimensión)
+      - [Nombre de la relación](#nombre-de-la-relación)
+    - [Relación de generalización (herencia)](#relación-de-generalización-herencia)
+    - [Relación de realización (interfaz)](#relación-de-realización-interfaz)
+  - [Elementos omitidos](#elementos-omitidos)
+  - [Particularidades del generador de código Java](#particularidades-del-generador-de-código-java)
+  - [Errores posibles](#errores-posibles)
+  - [Agregados a futuro](#agregados-a-futuro)
 
 ## Cómo representar clases UML
 Los miembros de una clase UML con la herramienta [UMLet](https://www.umlet.com/) o [UMLetino](https://www.umletino.com/umletino.html) se escriben en la ventana de propiedades (*Properties*). Podés ver el paso a paso en video [aquí](https://youtu.be/PJPjYslwuKk).
@@ -1220,8 +1222,8 @@ public class Alumno implements Calificable {
 
 | Posible error | Posible causa |
 |     :---:     |     :---:      |
-| "No se pudo convertir la expresión `_____` a un ATRIBUTO de la clase `NombreDeLaClase`" | No escribiste el atributo con la [sintaxis adecuada](#estructura-de-un-atributo-uml) o bien se está detectando un método como atributo por no haber puesto dos veces el separador `--` cuando la clase no tiene atributos.|
-| "No se pudo convertir la expresión `_____` a un MÉTODO de la clase `NombreDeLaClase`" | No escribiste el método con la [sintaxis adecuada](#estructura-de-un-método-uml).|
+| "No se pudo convertir la expresión `_____` en un ATRIBUTO de la clase `NombreDeLaClase`" | No escribiste el atributo con la [sintaxis adecuada](#estructura-de-un-atributo-uml) o bien se está detectando un método como atributo por no haber puesto dos veces el separador `--` cuando la clase no tiene atributos.|
+| "No se pudo convertir la expresión `_____` en un MÉTODO de la clase `NombreDeLaClase`" | No escribiste el método con la [sintaxis adecuada](#estructura-de-un-método-uml).|
 | "No se pudo encontrar una clase para el ORIGEN de una `descripcionDeLaRelacionProblemática`" | No se logró conectar el origen de la flecha con una clase. Revisá que el origen de la flecha haga contacto con la clase que la origina.|
 | "No se pudo encontrar una clase para el DESTINO de una `descripcionDeLaRelacionProblemática`" | No se logró conectar el destino de la flecha con una clase. Revisá que el destino de la flecha haga contacto con la clase objetivo.|
 | "La expresión '______' no representa una relación válida" | El tipo de flecha no coincide con ninguna de las esperadas. Revisá que en las propiedades (*properties*) de la flecha, el primer renglón contenga la expresión `lt=` y un [tipo de flecha válido](#cómo-representar-relaciones-uml).|
