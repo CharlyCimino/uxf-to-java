@@ -1,4 +1,4 @@
-![Logo](/img/uxf-to-java-logo.gif)
+![Logo](/img/uxf-to-java-logo-min.gif)
 #Documentación 📖
 [⬅️ Volver a README.md](README.md)
 ##Índice

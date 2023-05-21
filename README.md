@@ -1,4 +1,4 @@
-![Logo](/img/uxf-to-java-logo.gif)
+![Logo](/img/uxf-to-java-logo-min.gif)
 
 
 ![](https://img.shields.io/github/v/release/charlycimino/uxf-to-java?style=flat-square) ![](https://img.shields.io/github/languages/top/charlycimino/uxf-to-java?style=flat-square) ![](https://img.shields.io/github/stars/charlycimino/uxf-to-java?style=flat-square) ![](https://img.shields.io/github/license/CharlyCimino/uxf-to-java?style=flat-square)
@@ -9,7 +9,7 @@
 - [Cómo se usa ❓](#cómo-se-usa-)
 - [Accedé a la App ✨](#accedé-a-la-app-)
 - [Documentación 📖](#documentación-)
-- [Dependencias �](#dependencias-)
+- [Dependencias 📚](#dependencias-)
 - [Licencia 📄](#licencia-)
 - [Autor 👨](#autor-)
 - [Colaborar 🎁](#colaborar-)
