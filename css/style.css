@@ -7,3 +7,34 @@
     display: none;
 }
 
+body {
+    overflow-x: hidden;
+}
+
+body::after {
+    content: "";
+    background: url("../img/ccmed.png") no-repeat;
+    opacity: 0.1;
+    bottom: 1%;
+    right: 1%;
+    position: fixed;
+    z-index: 1;
+    width: 242px;
+    height: 103px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 767px) {
+    body::after {
+        content: "";
+        background: url("../img/ccmin.png") no-repeat;
+        opacity: 0.1;
+        bottom: 1%;
+        right: 1%;
+        position: fixed;
+        z-index: 1;
+        width: 97px;
+        height: 41px;
+        overflow: hidden;
+    }
+}
