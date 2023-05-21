@@ -50,6 +50,7 @@ class Clase {
         let javaCode = "";
         javaCode = this.escribirPaquete(javaCode);
         javaCode = this.escribirImports(javaCode);
+        javaCode = this.escribirComentario(javaCode);
         javaCode += `public ${this.tipo} ${this.nombre}`;
         javaCode = this.escribirSuperclase(javaCode);
         javaCode = this.escribirInterfaces(javaCode);
@@ -76,6 +77,14 @@ class Clase {
             });
             javaCode += `\n`;
         }
+        return javaCode;
+    }
+
+    escribirComentario(javaCode) {
+        javaCode += `/**
+* Código generado por la app UXFtoJava by Charly Cimino
+* @see https://github.com/CharlyCimino/uxf-to-java
+*/\n`;
         return javaCode;
     }
 
