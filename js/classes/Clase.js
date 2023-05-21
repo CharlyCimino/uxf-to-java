@@ -1,5 +1,7 @@
 class Clase {
 
+    static TAB = "\t";
+
     constructor(tipo = '', nombre = '', atributos = [], metodos = [], rectangulo) {
         this.tipo = tipo;
         this.nombre = nombre;
@@ -51,7 +53,7 @@ class Clase {
         javaCode += `public ${this.tipo} ${this.nombre}`;
         javaCode = this.escribirSuperclase(javaCode);
         javaCode = this.escribirInterfaces(javaCode);
-        javaCode += " {\n\n\t";
+        javaCode += ` {\n\n${Clase.TAB}`;
         javaCode = this.escribirValoresEnum(javaCode);
         javaCode = this.escribirAtributos(javaCode);
         javaCode += "\n";
@@ -86,7 +88,7 @@ class Clase {
 
     escribirAtributos(javaCode) {
         this.atributos.filter(at => at instanceof Atributo).forEach(at => {
-            javaCode += at.toJava() + "\n\t";
+            javaCode += at.toJava() + `\n${Clase.TAB}`;
         });
         return javaCode;
     }
@@ -95,10 +97,10 @@ class Clase {
         if (this.tipo === "enum") {
             const atrsEnum = this.atributos.filter(at => at instanceof AtributoEnum);
             atrsEnum.forEach(atEnum => {
-                javaCode += atEnum.toJava() + ",\n\t";
+                javaCode += atEnum.toJava() + `,\n${Clase.TAB}`;
             });
             if (atrsEnum.length > 0) {
-                javaCode = javaCode.substring(0, javaCode.length - 3) + ";\n\t"; // Quita última coma
+                javaCode = javaCode.substring(0, javaCode.length - 3) + `;\n${Clase.TAB}`; // Quita última coma
             }
         }
         return javaCode;
@@ -182,5 +184,9 @@ class Clase {
             tipo = 'enum';
         }
         return tipo;
+    }
+
+    static setTAB(newTab) {
+        Clase.TAB = newTab;
     }
 }

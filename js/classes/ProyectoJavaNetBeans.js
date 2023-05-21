@@ -3,11 +3,13 @@ class ProyectoJavaNetBeans extends ProyectoJava {
         super(filename, nombrePaquete, jdk, clasesJava);
     }
 
-    getZip() {
-        const zip = super.getZip();
+    completarZipSegunIDE(zip) {
         zip.folder(this.filename).folder("nbproject").file("project.xml", this.getProjectXML());
         zip.folder(this.filename).folder("nbproject").file("project.properties", this.getProjectProperties());
-        return zip;
+    }
+
+    setCaracterTabulacionSegunIDE() {
+        Clase.setTAB("    ");
     }
 
     getProjectProperties() {

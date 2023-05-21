@@ -21,6 +21,8 @@ class ProyectoJava {
         this.clasesJava.forEach(cl => console.log(cl.toJava()));
         const zip = new JSZip();
         const folderProjectZip = zip.folder(this.filename);
+        this.completarZipSegunIDE(zip); // Sobrescrito en cada subclase de proyecto
+        this.setCaracterTabulacionSegunIDE(); // Sobrescrito en cada subclase de proyecto
         this.generarCarpetaDeFuentesJava(folderProjectZip);
         return zip;
     }

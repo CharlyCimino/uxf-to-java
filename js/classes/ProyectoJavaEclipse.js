@@ -3,12 +3,14 @@ class ProyectoJavaEclipse extends ProyectoJava {
         super(filename, nombrePaquete, jdk, clasesJava);
     }
 
-    getZip() {
-        const zip = super.getZip();
+    completarZipSegunIDE(zip) {
         zip.folder(this.filename).folder(".settings").file("org.eclipse.jdt.core.prefs", this.getEclipsePrefs());
         zip.folder(this.filename).file(".classpath", this.getDotClassPath());
         zip.folder(this.filename).file(".project", this.getDotProject());
-        return zip;
+    }
+
+    setCaracterTabulacionSegunIDE() {
+        Clase.setTAB("\t");
     }
 
     getEclipsePrefs() {

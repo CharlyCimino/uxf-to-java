@@ -10,7 +10,7 @@ class Metodo {
     }
 
     toJava() {
-        let javaCode = `\t${this.visibilidad}`;
+        let javaCode = `${Clase.TAB}${this.visibilidad}`;
         if (this.esStatic) javaCode += "static ";
         if (this.esAbstract) javaCode += "abstract ";
         javaCode += this.esConstructor ? "" : `${this.retorno} `;
@@ -25,16 +25,16 @@ class Metodo {
         if (this.esAbstract) {
             javaCode += ";"; // Los métodos abstractos no llevan implementación
         } else {
-            javaCode += " {\n\t\t// Método a resolver...\n";
+            javaCode += ` {\n${Clase.TAB}${Clase.TAB}// Método a resolver...\n`;
             javaCode = this.escribirRetornoEnImplementacion(javaCode);
-            javaCode += "\t}";
+            javaCode += `${Clase.TAB}}`;
         }
         return javaCode;
     }
 
     escribirRetornoEnImplementacion(javaCode) {
         if (this.retorno !== "void") {
-            javaCode += "\t\treturn ";
+            javaCode += `${Clase.TAB}${Clase.TAB}return `;
             switch(this.retorno) {
                 case "byte":
                 case "Byte":
