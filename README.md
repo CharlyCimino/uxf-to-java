@@ -25,7 +25,8 @@
 ![Imagen de botón a presionar para exportar proyecto Java](img/instrucciones-3.png)
 4. Abrí tu *IDE* seleccionado e importá el proyecto .zip. Si no sabés cómo, aquí te lo enseño [para NetBeans](https://youtu.be/eZkQJn40tsQ) o [para Eclipse](#).
 5. **¡Ya tenés tu proyecto Java creado con sus respectivas clases!**
-![Imagen de botón a presionar para exportar proyecto como .uxf](img/instrucciones-4.png)![Imagen de botón a presionar para exportar proyecto como .uxf](img/instrucciones-5.png)
+   
+![Imagen de botón a presionar para exportar proyecto como .uxf](img/instrucciones-4.png) ![Imagen de botón a presionar para exportar proyecto como .uxf](img/instrucciones-5.png)
 
 ## Accedé a la App ✨ 
 El único requisito es tener un navegador web. Simplemente entrá al [siguiente enlace](https://charlycimino.github.io/uxf-to-java).
