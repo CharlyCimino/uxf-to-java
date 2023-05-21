@@ -9,6 +9,7 @@
 - [Cómo se usa ❓](#cómo-se-usa-)
 - [Accedé a la App ✨](#accedé-a-la-app-)
 - [Documentación 📖](#documentación-)
+- [Dependencias �](#dependencias-)
 - [Licencia 📄](#licencia-)
 - [Autor 👨](#autor-)
 - [Colaborar 🎁](#colaborar-)
@@ -29,6 +30,11 @@ El único requisito es tener un navegador web. Simplemente entrá al [Enlace pen
 ## Documentación 📖
 
 [Revisá la documentación](documentacion.md) para saber cómo escribir correctamente el diagrama de clases UML y evitar errores en la generación de código Java.
+
+## Dependencias 📚
+Este proyecto cuenta con dependencias creadas por terceros.
+* [x2js](https://github.com/abdolence/x2js), para parsear el archivo .uxf a JavaScript.
+* [JSZip](https://stuk.github.io/jszip/), para generar y exportar el proyecto como .zip
 
 ## Licencia 📄
 Este proyecto está bajo la [Licencia GNU GPLv3](COPYING).
