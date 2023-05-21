@@ -15,11 +15,13 @@ class RelacionDeAsociacion extends Relacion {
         this.checkClases();
         this.claseOrigen.addAtributo(this.definirAtributoUML());
     }
-
+    
     definirAtributoUML() {
         let tipo = this.claseDestino.nombre;
         if (this.cardinalidad.includes("*") || this.cardinalidad.includes("n")) {
             tipo = `${RelacionDeAsociacion.TIPO_COLECCION}<${tipo}>`;
+            console.warn(JAVA_IMPORTS[RelacionDeAsociacion.TIPO_COLECCION])
+            this.claseOrigen.addImport( JAVA_IMPORTS[RelacionDeAsociacion.TIPO_COLECCION] );
         } else if (!this.cardinalidad.includes("0") && !this.cardinalidad.includes("1")) {
             const cantCorchetes = this.cuantosCorchetes(this.cardinalidad);
             tipo = `${tipo}[]`;

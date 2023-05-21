@@ -1,4 +1,5 @@
 class Clase {
+
     constructor(tipo = '', nombre = '', atributos = [], metodos = [], rectangulo) {
         this.tipo = tipo;
         this.nombre = nombre;
@@ -7,7 +8,8 @@ class Clase {
         this.rectangulo = rectangulo;
         this.package = undefined;
         this.superclase = undefined;
-        this.interfaces = [];
+        this.interfaces = new Set();
+        this.imports = new Set();
         this.atributos = this.atributos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
         this.metodos = this.metodos.sort((a, b) => (a.constructor.name) > (b.constructor.name));
     }
@@ -24,7 +26,7 @@ class Clase {
     }
 
     addInterfaz(interf) {
-        this.interfaces.push(interf);
+        this.interfaces.add(interf);
     }
 
     addPackage(p) {
@@ -34,6 +36,10 @@ class Clase {
         this.package = p;
     }
 
+    addImport(imp) {
+        this.imports.add(imp);
+    }
+
     esConectadaPor(puntoDeRelacion) {
         return this.rectangulo.esConectadoPor(puntoDeRelacion);
     }
@@ -41,6 +47,7 @@ class Clase {
     toJava() {
         let javaCode = "";
         javaCode = this.escribirPaquete(javaCode);
+        javaCode = this.escribirImports(javaCode);
         javaCode += `public ${this.tipo} ${this.nombre}`;
         javaCode = this.escribirSuperclase(javaCode);
         javaCode = this.escribirInterfaces(javaCode);
@@ -56,6 +63,16 @@ class Clase {
     escribirPaquete(javaCode) {
         if (this.package) {
             javaCode += `package ${this.package};\n\n`;
+        }
+        return javaCode;
+    }
+
+    escribirImports(javaCode) {
+        if (this.imports.size > 0) {
+            this.imports.forEach(imp => {
+                javaCode += `import ${imp};\n`;
+            });
+            javaCode += `\n`;
         }
         return javaCode;
     }
@@ -88,12 +105,12 @@ class Clase {
     }
 
     escribirInterfaces(javaCode) {
-        if (this.interfaces.length > 0) {
+        if (this.interfaces.size > 0) {
             javaCode += ` implements `;
             this.interfaces.forEach(interf => {
                 javaCode += interf.nombre + ", ";
             });
-            if (this.interfaces.length > 0) {
+            if (this.interfaces.size > 0) {
                 javaCode = javaCode.substring(0, javaCode.length - 2); // Quita última coma
             }
         }

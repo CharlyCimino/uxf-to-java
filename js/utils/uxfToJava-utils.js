@@ -1,3 +1,10 @@
+const JAVA_IMPORTS = {
+    ArrayList: "java.util.ArrayList",
+    LinkedList: "java.util.LinkedList",
+    List: "java.util.List",
+    Collection: "java.util.Collection",
+}
+
 function resolverAbstract(cad) {
     const esAbstract = cad.includes('abstract') || cad.startsWith('/');
     return {
