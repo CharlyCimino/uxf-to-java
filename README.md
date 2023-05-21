@@ -18,8 +18,10 @@
 ## Cómo se usa ❓
 1. Generá un diagrama de clases UML con la herramienta [UMLet](https://www.umlet.com/) o [UMLetino](https://www.umletino.com/umletino.html). Si no sabés cómo, [te lo enseño aquí](https://youtu.be/PJPjYslwuKk).
 2. Exportá el diagrama de clases UML como se muestra en imagen, colocando un nombre preferentemente sin espacios. Se guardará un archivo con extensión ".uxf" en tu computadora.
-![Imagen de botón a presionar para exportar diagrama](img/instrucciones-1.png) ![Imagen de botón a presionar para exportar diagrama como .uxf](img/instrucciones-2.png)
-3. [Abrí la app UXF to JAVA]() y seguí las instrucciones del formulario. Luego presioná el botón *Descargar código Java* para generar y descargar el proyecto en formato .zip.
+
+ ![Imagen de botón a presionar para exportar diagrama](img/instrucciones-1.png) ![Imagen de botón a presionar para exportar diagrama como .uxf](img/instrucciones-2.png)
+
+3. [Abrí la app UXF to JAVA](https://charlycimino.github.io/uxf-to-java) y seguí las instrucciones del formulario. Luego presioná el botón *Descargar código Java* para generar y descargar el proyecto en formato .zip.
 ![Imagen de botón a presionar para exportar proyecto Java](img/instrucciones-3.png)
 4. Abrí tu *IDE* seleccionado e importá el proyecto .zip. Si no sabés cómo, aquí te lo enseño [para NetBeans](https://youtu.be/eZkQJn40tsQ) o [para Eclipse](#).
 5. **¡Ya tenés tu proyecto Java creado con sus respectivas clases!**
