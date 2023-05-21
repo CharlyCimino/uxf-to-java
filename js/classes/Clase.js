@@ -105,11 +105,11 @@ class Clase {
     escribirValoresEnum(javaCode) {
         if (this.tipo === "enum") {
             const atrsEnum = this.atributos.filter(at => at instanceof AtributoEnum);
-            atrsEnum.forEach(atEnum => {
-                javaCode += atEnum.toJava() + `,\n${Clase.TAB}`;
-            });
             if (atrsEnum.length > 0) {
-                javaCode = javaCode.substring(0, javaCode.length - 3) + `;\n${Clase.TAB}`; // Quita última coma
+                for (let i = 0; i < atrsEnum.length - 1; i++) {
+                    javaCode += atrsEnum[i].toJava() + `,\n${Clase.TAB}`;
+                }
+                javaCode += atrsEnum[atrsEnum.length - 1].toJava() + `;\n${Clase.TAB}`;
             }
         }
         return javaCode;
