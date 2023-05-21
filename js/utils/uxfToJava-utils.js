@@ -40,3 +40,7 @@ function resolverVisibilidad(cad) {
 function dataElementoToArray(cad) {
     return cad.replaceAll('  ', '').split('\n').filter(x => x !== '')
 }
+
+function createRegex(regexParts) {
+    return new RegExp(regexParts.map(r => r.source).join(''), "gm");
+}
