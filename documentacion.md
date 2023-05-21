@@ -30,7 +30,9 @@
   - [Relación de generalización (herencia)](#relación-de-generalización-herencia)
   - [Relación de realización (interfaz)](#relación-de-realización-interfaz)
 - [Elementos omitidos](#elementos-omitidos)
+- [Particularidades del generador de código Java](#particularidades-del-generador-de-código-java)
 - [Errores posibles](#errores-posibles)
+- [Agregados a futuro](#agregados-a-futuro)
 
 ## Cómo representar clases UML
 Los miembros de una clase UML con la herramienta [UMLet](https://www.umlet.com/) o [UMLetino](https://www.umletino.com/umletino.html) se escriben en la ventana de propiedades (*Properties*). Podés ver el paso a paso en video [aquí](https://youtu.be/PJPjYslwuKk).
@@ -1198,9 +1200,18 @@ public class Alumno implements Calificable {
 </td>
 </tr>
 </table>
+
 ## Elementos omitidos
 * Las relaciones de dependencia (representadas con flechas punteadas) son detectadas pero no producirán cambios en el código Java a generar.
 * Cualquier elemento que no sea una clase o una flecha de relación será omitido por el generador de código.
+
+## Particularidades del generador de código Java
+* El código generado para las clases que tengan un atributo de cero a muchos tendrá incluído el `import` de la colección correspondiente (según la elección del usuario en el formulario).
+* Todos los métodos no abstractos tendrán una cláusula `return` con un valor *hardcodeado* de acuerdo al tipo de retorno, excepto en los constructores (que no retornan nada).
+* Si un parámetro no tiene nombre, se colocará uno automático de acuerdo a su tipo y su orden, por ejemplo, `string1`, `int2`, `auto3`, etc.
+* Se generará automáticamente una clase `Principal` que contenga al método `main` (pendiente de resolver) para poder correr el programa.
+* El nombre del proyecto coincidirá con el nombre del archivo .uxf. Los espacios serán reemplazados por `-`.
+* El paquete con las clases estará dentro de la carpeta `src` en el '.zip', de acuerdo a la convención.
 
 ## Errores posibles
 
@@ -1215,6 +1226,9 @@ public class Alumno implements Calificable {
 | "`nombreDePaquete` no es un nombre de paquete válido" | El nombre del paquete escrito en el formulario no tiene la sintaxis adecuada.|
 | "La clase `NombreDeLaClase` ya es hija de `Clase1`, no puede serlo también de `Clase2`. Java no soporta herencia múltiple" | Una clase tiene en su origen a más de un flecha de relación de herencia.|
 
+## Agregados a futuro
+* Relaciones de clases anidadas (*inner classes*).
+* Contemplar clases de paquetes diferentes.
 
 [⬅️ Volver a README.md](README.md)
 

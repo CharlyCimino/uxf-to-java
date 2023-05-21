@@ -8,7 +8,7 @@ class ProyectoJava {
     }
 
     generarMain() {
-        const nombreClaseMain = "Test";
+        const nombreClaseMain = "Principal";
         const mainUML = "_+main(args: String[]): void_";
         const metodoMain = Metodo.parse(mainUML, nombreClaseMain);
         const mainClass = new Clase("class", nombreClaseMain, [], [metodoMain]);
