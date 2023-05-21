@@ -17,12 +17,11 @@ class ProyectoJava {
 
     getZip() {        
         this.corregirFechaJSZip(); // Para evitar error de fecha de modificación en los archivos generados
-
         this.colocarPackageEnClases();
         this.clasesJava.forEach(cl => console.log(cl.toJava()));
         const zip = new JSZip();
         const folderProjectZip = zip.folder(this.filename);
-        this.generarCarpetaSrc(folderProjectZip);
+        this.generarCarpetaDeFuentesJava(folderProjectZip);
         return zip;
     }
 
@@ -38,7 +37,7 @@ class ProyectoJava {
         })
     }
 
-    generarCarpetaSrc(zip) {
+    generarCarpetaDeFuentesJava(zip) {
         let pathSrc = "src";
         if (this.nombrePaquete) {
             pathSrc += "/" + this.nombrePaquete.replaceAll(".", "/");
