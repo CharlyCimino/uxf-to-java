@@ -10,10 +10,10 @@ class Relacion {
 
     checkClases() {
         if (this.claseOrigen === Relacion.PENDIENTE) {
-            throw new Error(`No se pudo encontrar una clase para el origen de una ${this.toString()}`);
+            throw new Error(`No se pudo encontrar una clase para el ORIGEN de una ${this.toString()}`);
         }
         if (this.claseDestino === Relacion.PENDIENTE) {
-            throw new Error(`No se pudo encontrar una clase para el destino de una ${this.toString()}`);
+            throw new Error(`No se pudo encontrar una clase para el DESTINO de una ${this.toString()}`);
         }
     }
 
@@ -22,11 +22,11 @@ class Relacion {
         let [tipoFlecha, cardinalidad = "1", nombreRelacion = "sinNombre"] = panelAttributes;
 
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
-        if (!match) throw new Error(`No se pudo parsear la relación dada por el tipo de flecha: '${tipoFlecha}'`);
+        if (!match) throw new Error(`La expresión '${tipoFlecha}' no representa una relación válida`);
         tipoFlecha = match[1]; // Sin el 'lt='
 
         match = Relacion.getCardinalidadRegex().exec(cardinalidad);
-        if (!match) throw new Error(`No se pudo parsear la cardinalidad '${cardinalidad}' de la relación dada por el tipo de flecha '${tipoFlecha}'`);
+        if (!match) throw new Error(`La expresión '${cardinalidad}' no representa una cardinalidad válida`);
         cardinalidad = match[1]; // Sin el 'm1='
 
         const rect = new Rectangulo(coord);

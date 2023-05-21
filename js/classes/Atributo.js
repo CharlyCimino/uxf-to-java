@@ -28,7 +28,7 @@ class Atributo {
     let esFinal = false;
 
     let match = Atributo.getRegex().exec(cad);
-    if (!match) throw new Error(`No se pudo parsear atributo '${cad}' de la clase ${nombreClase}\n`);
+    if (!match) throw new Error(`No se pudo convertir la expresión '${cad}' a un ATRIBUTO de la clase ${nombreClase}\n`);
 
     let [, esStatic, visibilidad, nombre, tipo, valor] = match;
 

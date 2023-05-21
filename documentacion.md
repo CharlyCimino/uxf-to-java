@@ -1,8 +1,7 @@
 ![Logo](/img/uxf-to-java-logo.gif)
 #Documentación 📖
-
+[⬅️ Volver a README.md](README.md)
 ##Índice
-
 - [Cómo representar clases UML](#cómo-representar-clases-uml)
   - [Nombre de la clase UML](#nombre-de-la-clase-uml)
   - [Atributos de la clase UML](#atributos-de-la-clase-uml)
@@ -1205,3 +1204,19 @@ public class Alumno implements Calificable {
 
 ## Errores posibles
 
+| Posible error | Posible causa |
+|     :---:     |     :---:      |
+| "No se pudo convertir la expresión `_____` a un ATRIBUTO de la clase `NombreDeLaClase`" | No escribiste el atributo con la [sintaxis adecuada](#estructura-de-un-atributo-uml) o bien se está detectando un método como atributo por no haber puesto dos veces el separador `--` cuando la clase no tiene atributos.|
+| "No se pudo convertir la expresión `_____` a un MÉTODO de la clase `NombreDeLaClase`" | No escribiste el método con la [sintaxis adecuada](#estructura-de-un-método-uml).|
+| "No se pudo encontrar una clase para el ORIGEN de una `descripcionDeLaRelacionProblemática`" | No se logró conectar el origen de la flecha con una clase. Revisá que el origen de la flecha haga contacto con la clase que la origina.|
+| "No se pudo encontrar una clase para el DESTINO de una `descripcionDeLaRelacionProblemática`" | No se logró conectar el destino de la flecha con una clase. Revisá que el destino de la flecha haga contacto con la clase objetivo.|
+| "La expresión '______' no representa una relación válida" | El tipo de flecha no coincide con ninguna de las esperadas. Revisá que en las propiedades (*properties*) de la flecha, el primer renglón contenga la expresión `lt=` y un [tipo de flecha válido](#cómo-representar-relaciones-uml).|
+| "La expresión '______' no representa una cardinalidad válida" | No escribiste la cardinalidad de la asociación con la [sintaxis adecuada](#cardinalidad-de-la-relación), o bien, se está confundiendo el nombre de la asociación con la cardinalidad por no haberla puesto. Recordá que primero debe ir la cardinalidad y en el renglón de abajo, el nombre de la relación. Si están al revés, se producirá este error.|
+| "`nombreDePaquete` no es un nombre de paquete válido" | El nombre del paquete escrito en el formulario no tiene la sintaxis adecuada.|
+| "La clase `NombreDeLaClase` ya es hija de `Clase1`, no puede serlo también de `Clase2`. Java no soporta herencia múltiple" | Una clase tiene en su origen a más de un flecha de relación de herencia.|
+
+
+[⬅️ Volver a README.md](README.md)
+
+---
+Con ❤️ por [Charly Cimino](https://github.com/CharlyCimino) 😊
