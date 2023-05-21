@@ -25,7 +25,7 @@ class Metodo {
         if (this.esAbstract) {
             javaCode += ";"; // Los métodos abstractos no llevan implementación
         } else {
-            javaCode += ` {\n${Clase.TAB}${Clase.TAB}// Método a resolver...\n`;
+            javaCode += ` {\n${Clase.TAB}${Clase.TAB}// ${this.esConstructor ? "Constructor" : "Método"} a resolver...\n`;
             javaCode = this.escribirRetornoEnImplementacion(javaCode);
             javaCode += `${Clase.TAB}}`;
         }
@@ -117,19 +117,19 @@ class Metodo {
                 partes = partes.map(p => p.trim());
                 const { 0: nombre, 1: tipo } = partes;
                 if (tipo) {
-                    return { nombre, tipo };
+                    partes = { nombre, tipo };
                 } else {
-                    let nombreParametro;
+                    let nombreParametro = nombre;
                     if (nombre.includes('<')) {
                         nombreParametro = nombre.substring(0, nombre.indexOf('<'));
-                    } else {
-                        nombreParametro = `${nombre}${(i + 1)}`;
                     }
-                    return {
-                        nombre: nombreParametro.toLowerCase(),
+                    nombreParametro = `${nombreParametro}${(i + 1)}`.toLowerCase();
+                    partes = {
+                        nombre: nombreParametro,
                         tipo: nombre
                     };
                 }
+                return partes;
             });
         }
         return new Metodo(visibilidad, nombre, esStatic, esAbstract, esConstructor, parametros, retorno);

@@ -19,7 +19,7 @@ class Relacion {
 
     static parse(panelAttributes, additionalAttributes, coord, zoom) {
 
-        let [tipoFlecha, cardinalidad = "1", nombreRelacion = ""] = panelAttributes;
+        let [tipoFlecha, cardinalidad = "1", nombreRelacion = "sinNombre"] = panelAttributes;
 
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
         if (!match) throw new Error(`No se pudo parsear la relación dada por el tipo de flecha: '${tipoFlecha}'`);
