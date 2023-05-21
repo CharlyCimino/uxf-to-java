@@ -1,8 +1,6 @@
 ![Logo](/img/uxf-to-java-logo-min.gif)
 
 
-![](https://img.shields.io/github/v/release/charlycimino/uxf-to-java?style=flat-square) ![](https://img.shields.io/github/languages/top/charlycimino/uxf-to-java?style=flat-square) ![](https://img.shields.io/github/stars/charlycimino/uxf-to-java?style=flat-square) ![](https://img.shields.io/github/license/CharlyCimino/uxf-to-java?style=flat-square)
-
 **Herramienta online para generar código Java a partir de un diagrama de clases generado con [UMLet](https://www.umlet.com/) o [UMLetino](https://www.umletino.com/umletino.html).**
 
 ## Índice
