@@ -1,7 +1,10 @@
 ![Logo](/img/uxf-to-java-logo-min.gif)
-#Documentación 📖
+
 [⬅️ Volver a README.md](README.md)
-##Índice
+
+# Documentación 📖
+
+## Índice
 - [Cómo representar clases UML](#cómo-representar-clases-uml)
   - [Nombre de la clase UML](#nombre-de-la-clase-uml)
   - [Atributos de la clase UML](#atributos-de-la-clase-uml)
