@@ -31,9 +31,11 @@ El único requisito es tener un navegador web. Simplemente entrá al [Enlace pen
 [Lee la documentación](documentacion.md) para saber cómo escribir correctamente el diagrama de clases UML y evitar errores en la generación de código Java.
 
 ## Licencia 📄
-Este proyecto está bajo la Licencia (Tu Licencia) - mira el archivo [LICENSE.md](LICENSE.md) para detalles
+Este proyecto está bajo la [Licencia GNU GPLv3](COPYING).
 
 ## Autor 👨
+
+![Autor](img/cc.png)
 
 ## Colaborar 🎁
 
