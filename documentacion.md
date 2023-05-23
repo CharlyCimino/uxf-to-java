@@ -1,6 +1,6 @@
 ![Logo](/img/uxf-to-java-logo-min.gif)
 
-[⬅️ Volver a README.md](README.md)
+[⬅️ Volver atrás](https://github.com/CharlyCimino/uxf-to-java)
 
 # Documentación 📖
 
@@ -1226,7 +1226,7 @@ public class Alumno implements Calificable {
 * Relaciones de clases anidadas (*inner classes*).
 * Contemplar clases de paquetes diferentes.
 
-[⬅️ Volver a README.md](README.md)
+[⬅️ Volver atrás](https://github.com/CharlyCimino/uxf-to-java)
 
 ---
 Con ❤️ por [Charly Cimino](https://github.com/CharlyCimino) 😊
