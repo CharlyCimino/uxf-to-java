@@ -21,8 +21,6 @@ class Relacion {
 
         let [tipoFlecha, cardinalidad = "m1=1", nombreRelacion = "sinNombre"] = panelAttributes;
 
-        console.warn(tipoFlecha, cardinalidad, nombreRelacion);
-
         if (nombreRelacion.includes("m1")) {
             [nombreRelacion, cardinalidad] = [cardinalidad, nombreRelacion]; // swap
         } else if(nombreRelacion === "sinNombre" && !cardinalidad.includes("m1=")) {
