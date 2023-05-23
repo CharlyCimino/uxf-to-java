@@ -54,10 +54,10 @@ class Clase {
         javaCode += `public ${this.tipo} ${this.nombre}`;
         javaCode = this.escribirSuperclase(javaCode);
         javaCode = this.escribirInterfaces(javaCode);
-        javaCode += ` {\n\n${Clase.TAB}`;
+        javaCode += ` {\n\n`;
         javaCode = this.escribirValoresEnum(javaCode);
         javaCode = this.escribirAtributos(javaCode);
-        javaCode += "\n";
+        javaCode += this.atributos.length > 0 ? "\n" : "";
         javaCode = this.escribirMetodos(javaCode);
         javaCode += "}";
         return javaCode;
@@ -90,14 +90,14 @@ class Clase {
 
     escribirMetodos(javaCode) {
         this.metodos.forEach(me => {
-            javaCode += me.toJava() + "\n\n";
+            javaCode += `${Clase.TAB}${me.toJava()}\n\n`;
         });
         return javaCode;
     }
 
     escribirAtributos(javaCode) {
         this.atributos.filter(at => at instanceof Atributo).forEach(at => {
-            javaCode += at.toJava() + `\n${Clase.TAB}`;
+            javaCode += `${Clase.TAB}${at.toJava()}\n`;
         });
         return javaCode;
     }
@@ -107,9 +107,9 @@ class Clase {
             const atrsEnum = this.atributos.filter(at => at instanceof AtributoEnum);
             if (atrsEnum.length > 0) {
                 for (let i = 0; i < atrsEnum.length - 1; i++) {
-                    javaCode += atrsEnum[i].toJava() + `,\n${Clase.TAB}`;
+                    javaCode += `${Clase.TAB}${atrsEnum[i].toJava()},\n`;
                 }
-                javaCode += atrsEnum[atrsEnum.length - 1].toJava() + `;\n${Clase.TAB}`;
+                javaCode += `${Clase.TAB}${atrsEnum[atrsEnum.length - 1].toJava()};\n`;
             }
         }
         return javaCode;

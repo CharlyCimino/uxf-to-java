@@ -10,7 +10,7 @@ class Metodo {
     }
 
     toJava() {
-        let javaCode = `${Clase.TAB}${this.visibilidad}`;
+        let javaCode = this.visibilidad;
         if (this.esStatic) javaCode += "static ";
         if (this.esAbstract) javaCode += "abstract ";
         javaCode += this.esConstructor ? "" : `${this.retorno} `;
