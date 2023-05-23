@@ -143,8 +143,10 @@ class Clase {
         let atributosSinProcesar = [];
         let metodosSinProcesar = [];
 
-        const idx1Separador = clazzItem.indexOf('--');
-        const idx2Separador = clazzItem.lastIndexOf('--');
+        const regexSeparador = /-+ *$/; // Renglones donde solo haya guiones (y tal vez espacios)
+        
+        const idx1Separador = clazzItem.regexIndexOf(regexSeparador);
+        const idx2Separador = clazzItem.regexLastIndexOf(regexSeparador);
 
         if (idx1Separador > -1) {
             if (idx2Separador == idx1Separador) { // Solo atributos

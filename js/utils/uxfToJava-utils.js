@@ -44,3 +44,36 @@ function dataElementoToArray(cad) {
 function createRegex(regexParts) {
     return new RegExp(regexParts.map(r => r.source).join(''), "gm");
 }
+
+
+/** * Regular Expresion IndexOf for Arrays 
+* This little addition to the Array prototype will iterate over array 
+* and return the index of the first element which matches the provided 
+* regular expresion. 
+* Note: This will not match on objects. 
+* @param  {RegEx}   rx The regular expression to test with. E.g. /-ba/gim 
+* @return {Numeric} -1 means not found */
+if (typeof Array.prototype.regexIndexOf === 'undefined') {
+    Array.prototype.regexIndexOf = function (rx) {
+        for (let i in this) {
+            i = parseInt(i);
+            if (this[i].toString().match(rx)) {
+                return i;
+            }
+        }
+        return -1;
+    };
+}
+
+/**
+* @param  {RegEx}   rx The regular expression to test with. E.g. /-ba/gim 
+* @return {Numeric} -1 means not found */
+if (typeof Array.prototype.regexLastIndexOf === 'undefined') {
+    Array.prototype.regexLastIndexOf = function (rx) {
+        let i = this.length - 1;
+        while (i >= 0 && !this[i].toString().match(rx)) {
+            i--;
+        }
+        return i;
+    };
+}

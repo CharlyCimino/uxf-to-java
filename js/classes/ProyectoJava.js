@@ -18,7 +18,7 @@ class ProyectoJava {
     getZip() {        
         this.corregirFechaJSZip(); // Para evitar error de fecha de modificación en los archivos generados
         this.colocarPackageEnClases();
-        //this.clasesJava.forEach(cl => console.log(cl.toJava()));
+        this.clasesJava.forEach(cl => console.log(cl.toJava()));
         const zip = new JSZip();
         const folderProjectZip = zip.folder(this.filename);
         this.completarZipSegunIDE(zip); // Sobrescrito en cada subclase de proyecto

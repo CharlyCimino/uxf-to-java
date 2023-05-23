@@ -35,7 +35,7 @@ async function processDownloadProject(evt) {
     diagram = xmlToClassDiagram(xmlAsJson);
     javaProject = classDiagramToJavaProject(diagram);
     const zip = javaProject.getZip();
-    await descargar(zip);
+    //await descargar(zip);
     mostrarCartelColaborar(true);
   } catch(e) {
     mostrarCartelColaborar(false);
