@@ -24,11 +24,7 @@ class Relacion {
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
         if (!match) throw new Error(`La expresión '${tipoFlecha}' no representa una relación válida`);
         tipoFlecha = match[1]; // Sin el 'lt='
-
-        match = Relacion.getCardinalidadRegex().exec(cardinalidad);
-        if (!match) throw new Error(`La expresión '${cardinalidad}' no representa una cardinalidad válida`);
-        cardinalidad = match[1]; // Sin el 'm1='
-
+        
         const rect = new Rectangulo(coord);
         let valoresIndividuales = additionalAttributes.split(";")
         for (let i = 0; i < valoresIndividuales.length; i += 2) {
@@ -38,7 +34,11 @@ class Relacion {
         }
         
         let relacion = RelacionFactory.crearRelacion(tipoFlecha, rect);
+        
         if (relacion instanceof RelacionDeAsociacion) {
+            match = Relacion.getCardinalidadRegex().exec(cardinalidad);
+            if (!match) throw new Error(`La expresión '${cardinalidad}' no representa una cardinalidad válida`);
+            cardinalidad = match[1]; // Sin el 'm1='
             relacion.nombre = nombreRelacion;
             relacion.cardinalidad = cardinalidad;
         }
