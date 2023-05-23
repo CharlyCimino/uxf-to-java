@@ -21,12 +21,9 @@
     - [Enumeraciones con atributos y métodos](#enumeraciones-con-atributos-y-métodos)
   - [Interfaces](#interfaces)
   - [Cómo representar relaciones UML](#cómo-representar-relaciones-uml)
+    - [Relación de asociación](#relación-de-asociación)
       - [Tipos de asociación](#tipos-de-asociación)
       - [Cardinalidad de la relación](#cardinalidad-de-la-relación)
-      - [Atributo asociado a la relación](#atributo-asociado-a-la-relación)
-    - [Relación de asociación](#relación-de-asociación)
-      - [Tipos de asociación](#tipos-de-asociación-1)
-      - [Cardinalidad de la relación](#cardinalidad-de-la-relación-1)
         - [Un solo elemento](#un-solo-elemento)
         - [De cero/uno a muchos elementos](#de-cerouno-a-muchos-elementos)
         - [Número definido de elementos](#número-definido-de-elementos)
@@ -46,16 +43,14 @@ Los miembros de una clase UML con la herramienta [UMLet](https://www.umlet.com/)
 
 Las clases en UML deberán tener la siguiente estructura:
 1.  Nombre de la clase ***(obligatorio)***
-2.  Separador: `--` ***(obligatorio)***
+2.  Separador: Un renglón con solamente uno o más `-` ***(obligatorio)***
 3.  Atributos de la clase
-4.  Separador: `--` ***(obligatorio si hay métodos)***
+4.  Separador: Un renglón con solamente uno o más `-` ***(obligatorio si hay métodos)***
 5.  Métodos de la clase
-
-Si bien UMLet permite un solo guión medio `-` para dibujar un separador, se recomienda usar `--` para evitar ambigüedades con la visibilidad `private` a la hora de exportar a código Java.
 
 ### Nombre de la clase UML
 
-El nombre de la clase UML será el utilizado cuando se la exporte a código Java. Recordá seguir la convención de nomenclatura: En singular y con notación **U**pper**C**amel**C**ase.
+El nombre de la clase UML será el utilizado cuando se la exporte a código Java. Recordá seguir la convención de nomenclatura: En singular y con notación UpperCamelCase.
 Por defecto, la clase en Java será `public`.
 
 <table>
@@ -661,7 +656,7 @@ Si colocás el estereotipo `<<interface>>` o `<<interfaz>>` justo encima del nom
 </td>
 <td>
         <img src="img/clase-interface1.png">
-        </td>  
+</td>  
 <td>
 
 ```java
@@ -685,7 +680,7 @@ public interface Mostrable {
 </td>
 <td>
         <img src="img/clase-interface2.png">
-        </td>  
+</td>  
 <td>
 
 ```java
@@ -703,10 +698,6 @@ public interface Facturable {
 Las relaciones entre clases UML son representadas mediante flechas, que pueden colocarse en el editor haciendo doble click en alguna que figure en la paleta de elementos.
 
 ![](img/instrucciones-7.png)
-
-#### Tipos de asociación
-#### Cardinalidad de la relación
-#### Atributo asociado a la relación
 
 ### Relación de asociación
 Una relación de asociación representa que una `ClaseA` se compone de una `ClaseB`, por lo tanto, en la `ClaseA` habrá un atributo de la `ClaseB`.
@@ -782,7 +773,7 @@ public class Auto {
 </table>
 
 #### Cardinalidad de la relación
-Debajo del tipo de flecha, debe ir la cardinalidad, cuya sintaxis será `m1=` seguido del número o rango de valores posibles.
+Debajo del tipo de flecha, debe ir la cardinalidad, cuya sintaxis será `m1=` (obligatorio) seguido del número o rango de valores posibles.
 Si no se coloca una cardinalidad, se asumirá que es `1`.
 
 ##### Un solo elemento
