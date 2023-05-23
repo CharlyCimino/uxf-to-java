@@ -71,7 +71,7 @@ Por defecto, la clase en Java será `public`.
 
 ```java
 public class Persona {
-  // ...
+  
 }
   ``` 
 </td>
@@ -97,7 +97,7 @@ Si el nombre de la clase está encerrada entre barras `/`, se la considerará un
 
 ```java
 public abstract class Persona {
-  // ...
+  
 }
   ``` 
 </td>
