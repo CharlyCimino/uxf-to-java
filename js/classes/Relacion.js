@@ -21,6 +21,10 @@ class Relacion {
 
         let [tipoFlecha, cardinalidad = "1", nombreRelacion = "sinNombre"] = panelAttributes;
 
+        if (nombreRelacion.includes("m1")) {
+            [nombreRelacion, cardinalidad] = [cardinalidad, nombreRelacion]; // swap
+        }
+
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
         if (!match) throw new Error(`La expresión '${tipoFlecha}' no representa una relación válida`);
         tipoFlecha = match[1]; // Sin el 'lt='
