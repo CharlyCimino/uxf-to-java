@@ -19,10 +19,15 @@ class Relacion {
 
     static parse(panelAttributes, additionalAttributes, coord, zoom) {
 
-        let [tipoFlecha, cardinalidad = "1", nombreRelacion = "sinNombre"] = panelAttributes;
+        let [tipoFlecha, cardinalidad = "m1=1", nombreRelacion = "sinNombre"] = panelAttributes;
+
+        console.warn(tipoFlecha, cardinalidad, nombreRelacion);
 
         if (nombreRelacion.includes("m1")) {
             [nombreRelacion, cardinalidad] = [cardinalidad, nombreRelacion]; // swap
+        } else if(nombreRelacion === "sinNombre" && !cardinalidad.includes("m1=")) {
+            nombreRelacion = cardinalidad;
+            cardinalidad = "m1=1";
         }
 
         let match = Relacion.getTipoFlechaRegex().exec(tipoFlecha);
